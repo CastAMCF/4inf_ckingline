@@ -1,4 +1,5 @@
 # 4 in fucking Line BITCH!!!!!!!!!!!
 Quatro em Linha duh
 
-*Quando tu tás na PlayOptions e sais a musica começa a tocar do inicio e sobrepoe se à outra de resto **acho** q tá bom*
+*Bug da música corrigido* 🥳🥳🥳🎉🎉🎉🎉
+*De resto **acho** q tá bom*
