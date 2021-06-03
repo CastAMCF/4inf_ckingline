@@ -12,7 +12,15 @@ import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +31,7 @@ import API.Fichi;
 
 public class PlayOption extends JFrame implements ComponentListener {
 	
+	private Clip clip;
 	private Menu frame;
 	private JPanel playoptionPanel;
 	private JLabel btnnewgame;
@@ -36,6 +45,10 @@ public class PlayOption extends JFrame implements ComponentListener {
 	private int widthfile = 0;
 	private int heightfile = 0;
 	private int soundfile = 0;
+	private static long clipTimePostion;
+	private static boolean music = false;
+	public int count = 0;
+	public int count1 = 1;
 
 	public PlayOption() {
 		bool = true;
@@ -119,6 +132,30 @@ public class PlayOption extends JFrame implements ComponentListener {
 		widthfile = Integer.parseInt(str[0].replaceAll("\\D+",""));
 		heightfile = Integer.parseInt(str[1].replaceAll("\\D+",""));
 		soundfile = Integer.parseInt(str[2].replaceAll("\\D+",""));
+		
+		
+		try {
+			
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(getClass().getResource("/multimedia/audios/music.wav").getFile()));
+			clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue((float)(soundfile-84));
+			
+			if (Menu.getTimeMusic() > (34360748*count1)) {
+				count++;
+				count1++;
+			}
+			clip.setMicrosecondPosition(Menu.getTimeMusic() - (34360748*count));
+			
+			//clip.setMicrosecondPosition(Menu.getTimeMusic());
+			clip.start();
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			
+		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
+			e1.printStackTrace();
+		}
+		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/multimedia/imagens/logo.png")));
 		setTitle("Quatro em Linha");
@@ -216,6 +253,9 @@ public class PlayOption extends JFrame implements ComponentListener {
 				opcao = false;
 				selected = 0;
 				listening = false;
+				Menu.setPlayop(true);
+				clipTimePostion = clip.getMicrosecondPosition();
+				clip.stop();
 				frame = new Menu();
 				frame.setVisible(true);
 				
@@ -245,7 +285,11 @@ public class PlayOption extends JFrame implements ComponentListener {
 	public static boolean getBool() {
 		return bool;
 	}
-
+	
+	public static long getTimeMusic() {
+		return clipTimePostion;
+	}
+	
 	@Override
 	public void componentHidden(ComponentEvent arg0) {
 		// TODO Auto-generated method stub

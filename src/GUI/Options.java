@@ -270,7 +270,7 @@ public class Options extends JFrame implements ComponentListener {
 				opcao = false;
 				selected = 0;
 				listening = false;
-				Menu.setMusic(true);
+				Menu.setOption(true);
 				clipTimePostion = clip.getMicrosecondPosition();
 				clip.stop();
 				frame = new Menu();

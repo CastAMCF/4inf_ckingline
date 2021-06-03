@@ -49,16 +49,10 @@ public class Menu extends JFrame implements ComponentListener {
 	
 	private Clip clip;
 	private JPanel contentPane;
-	private JPanel playoptionPanel;
-	private JPanel contentPane1;
 	private JLabel label;
 	private JLabel label_1;
 	private JLabel label_2;
 	private JLabel label_3;
-	private JLabel btnnewgame;
-	private JLabel btncontinue;
-	private JLabel btnback;
-	private Font font = Fonts.Crackman.Normal(50);
 	private boolean play;
 	private boolean options;
 	private boolean exit;
@@ -71,9 +65,12 @@ public class Menu extends JFrame implements ComponentListener {
 	private boolean optionsgui = false;
 	private boolean playoptiongui = false;
 	private static long clipTimePostion;
-	private static boolean music = false;
 	public int count = 0;
 	public int count1 = 1;
+	public int count2 = 0;
+	public int count3 = 1;
+	private static boolean option = false;
+	private static boolean playop = false;
 
 	/**
 	 * Launch the application.
@@ -264,23 +261,39 @@ public class Menu extends JFrame implements ComponentListener {
 		
 		
 		try {
-				
+					
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(getClass().getResource("/multimedia/audios/music.wav").getFile()));
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 			gainControl.setValue((float)(soundfile-84));
 			
-			if (Options.getTimeMusic() > (34360748*count1)) {
-				count++;
-				count1++;
+			if(option) {
+				if (Options.getTimeMusic() > (34360748*count1)) {
+					count++;
+					count1++;
+					count2 = count;
+					count3 = count1;
+				}
+				clip.setMicrosecondPosition(Options.getTimeMusic() - (34360748*count));
+				setOption(false);
 			}
-			clip.setMicrosecondPosition(Options.getTimeMusic() - (34360748*count));
 			
+			if(playop) {
+				if (PlayOption.getTimeMusic() > (34360748*count3)) {
+					count2++;
+					count3++;
+					count = count2;
+					count1 = count3;
+				}
+				clip.setMicrosecondPosition(PlayOption.getTimeMusic() - (34360748*count2));
+				setPlayop(false);
+			}
+				
 			//clip.setMicrosecondPosition(Options.getTimeMusic());
 			clip.start();
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
-			
+				
 		} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
 			e1.printStackTrace();
 		}
@@ -361,6 +374,8 @@ public class Menu extends JFrame implements ComponentListener {
 				exit = false;
 				selected = 0;
 				listening = false;
+				clipTimePostion = clip.getMicrosecondPosition();
+				clip.stop();
 				PlayOption frame = new PlayOption();
 				frame.setVisible(true);
 				
@@ -441,12 +456,6 @@ public class Menu extends JFrame implements ComponentListener {
 	}
 	
 	private void playoptioGui() {
-		playoptionPanel.add(btnnewgame);
-		playoptionPanel.add(btncontinue);
-		playoptionPanel.add(btnback);
-    }
-	
-	protected void menuGui() {
 		
     }
 	
@@ -476,8 +485,12 @@ public class Menu extends JFrame implements ComponentListener {
 		return clipTimePostion;
 	}
 	
-	public static void setMusic(boolean music1) {
-		music = music1;
+	public static void setOption(boolean option1) {
+		option = option1;
+	}
+	
+	public static void setPlayop(boolean playop1) {
+		playop = playop1;
 	}
 
 	@Override
