@@ -26,6 +26,6 @@ Quatro em Linha duh
 > Solução Avançada(16-20 valores) ❌
 - [ ] Novas funcionalidades que melhorem a aplicação.
 - [ ] - Configuração do tabuleiro e dos jogadores
-- [ ] - Variações das regras do jogo
-- [ ] - Melhorias na interface e no sistema de gestão de eventos.
-- [ ] - Melhoria na Inteligência Artificial.
+- [x] - Variações das regras do jogo (*tá pronta só n tá implementada*)
+- [x] - Melhorias na interface e no sistema de gestão de eventos. (*vai se fazendo com o tempo*)
+- [x] - Melhoria na Inteligência Artificial. (*vai se fazendo com o tempo*)
