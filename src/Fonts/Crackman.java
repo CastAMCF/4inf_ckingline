@@ -14,12 +14,11 @@ public class Crackman {
 	
 	public static Font Normal(float size) {
 		
-		//create the font
+		//cria a fonte
 		try {
-			//create the font to use. Specify the size!
 			font_normal = Font.createFont(Font.TRUETYPE_FONT, Crackman.class.getResourceAsStream("/Fonts/crackman.ttf")).deriveFont(size);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			//register the font
+			//alistar a fonte
 			ge.registerFont(font_normal);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -33,12 +32,11 @@ public class Crackman {
 	
 	public static Font Back(float size) {
 		
-		//create the font
+		//cria a fonte
 		try {
-			//create the font to use. Specify the size!
 			font_back = Font.createFont(Font.TRUETYPE_FONT, Crackman.class.getResourceAsStream("/Fonts/crackman.ttf")).deriveFont(size);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			//register the font
+			//alistar a fonte
 			ge.registerFont(font_back);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -52,12 +50,11 @@ public class Crackman {
 	
 	public static Font Front(float size) {
 		
-		//create the font
+		//cria a fonte
 		try {
-			//create the font to use. Specify the size!
 			font_front = Font.createFont(Font.TRUETYPE_FONT, Crackman.class.getResourceAsStream("/Fonts/crackman.ttf")).deriveFont(size);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			//register the font
+			//alistar a fonte
 			ge.registerFont(font_front);
 		} catch (IOException e) {
 			e.printStackTrace();

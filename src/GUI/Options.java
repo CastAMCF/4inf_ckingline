@@ -24,8 +24,12 @@ import javax.sound.sampled.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.SystemColor;
@@ -90,6 +94,7 @@ public class Options extends JFrame implements ComponentListener {
 	private static boolean music = false;
 	public int count = 0;
 	public int count1 = 1;
+	private JLabel label_3_2;
 	
 	public Options() {
 		bool = true;
@@ -181,13 +186,15 @@ public class Options extends JFrame implements ComponentListener {
 		
 		try {
 			
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(getClass().getResource("/multimedia/audios/music.wav").getFile()));
+			InputStream in = getClass().getResourceAsStream("/multimedia/audios/music.wav");
+			InputStream bufferedIn = new BufferedInputStream(in);
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedIn);
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 			gainControl.setValue((float)(soundfile-84));
 			
-			if (Menu.getTimeMusic() > (34360748*count1)) {
+			while (Menu.getTimeMusic() > (34360748*count1)) {
 				count++;
 				count1++;
 			}
@@ -219,7 +226,47 @@ public class Options extends JFrame implements ComponentListener {
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/multimedia/imagens/logo.png")));
 		setTitle("Quatro em Linha");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowListener() {
+					@Override
+					public void windowOpened(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowClosing(WindowEvent paramWindowEvent) {
+						
+						exit();
+						
+					}
+					@Override
+					public void windowClosed(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowIconified(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowDeiconified(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowActivated(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowDeactivated(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+		});
+		
+		
 		Point loc = Menu.getLoca();
 		setBounds(loc.x, loc.y, widthfile, heightfile);
 		setResizable(false);
@@ -300,23 +347,11 @@ public class Options extends JFrame implements ComponentListener {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				boolean bool = true;
 				String str = text.getText();
 			    String[] arrOfStr = str.split(" X ");
-			  	
-			    List<Integer> myList = new ArrayList<Integer>();
 			    
-			    for (String a1 : arrOfStr) {
-			    	myList.add(Integer.parseInt(a1));
-			    }
-			    
-			    for (int e1 : myList) {
-			    	if(bool)
-			    		width = e1;
-			    	
-			    	height = e1;
-			    	bool = false;
-			    }
+			    width = Integer.parseInt(arrOfStr[0]);
+			    height = Integer.parseInt(arrOfStr[1]);
 				
 			    Fichi.writePrefs("preferencias.ap", width, height, soundfile, vk1, vk2, vk3);
 			    
@@ -563,6 +598,21 @@ public class Options extends JFrame implements ComponentListener {
 	public static long getTimeMusic() {
 		return clipTimePostion;
 	}
+	
+	private void exit() {
+		listening = false;
+		Popup fram = new Popup(this, "Tem a certeza que pretende sair ?", soundfile);
+		
+		String str = text.getText();
+	    String[] arrOfStr = str.split(" X ");
+	    int width1 = Integer.parseInt(arrOfStr[0]);
+	    int height1 = Integer.parseInt(arrOfStr[1]);
+		
+		if(fram.run(width1, height1)) {
+			System.exit(0);
+		}
+		listening = true;
+    }
 
 	@Override
 	public void componentHidden(ComponentEvent e) {

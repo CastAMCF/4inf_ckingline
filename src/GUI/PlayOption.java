@@ -12,8 +12,12 @@ import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -24,15 +28,19 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import API.FILException;
 import API.Fichi;
 
 public class PlayOption extends JFrame implements ComponentListener {
 	
+	private PlayOption mainframe;
 	private Clip clip;
 	private Menu frame;
+	private NewGameOptions frame1;
 	private JPanel playoptionPanel;
 	private JLabel btnnewgame;
 	private JLabel btncontinue;
@@ -49,6 +57,18 @@ public class PlayOption extends JFrame implements ComponentListener {
 	private static boolean music = false;
 	public int count = 0;
 	public int count1 = 1;
+	public int count2 = 0;
+	public int count3 = 1;
+	public int count4 = 0;
+	public int count5 = 1;
+	public int count6 = 0;
+	public int count7 = 1;
+	private static boolean menu = false;
+	private static boolean newgame = false;
+	private static boolean continuegamemult = false;
+	private boolean newgameoptionsgui = false;
+	private boolean continuegamegui = false;
+	private boolean continuegamebotgui = false;
 
 	public PlayOption() {
 		bool = true;
@@ -61,7 +81,7 @@ public class PlayOption extends JFrame implements ComponentListener {
 		        	switch (ke.getID()) {
 		        	case KeyEvent.KEY_PRESSED:
 		        		if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
-		        			
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		        			if(opcao) {
 		        				API.Images.setImage(btnnewgame, getClass().getResource("/multimedia/imagens/button_newgame_exited.png"));
 		        				API.Images.setImage(btncontinue, getClass().getResource("/multimedia/imagens/button_continue_entered.png"));
@@ -77,7 +97,7 @@ public class PlayOption extends JFrame implements ComponentListener {
 		        			}
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
-		        			
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		        			if(opcao) {
 		        				API.Images.setImage(btnnewgame, getClass().getResource("/multimedia/imagens/button_newgame_exited.png"));
 		        				API.Images.setImage(btncontinue, getClass().getResource("/multimedia/imagens/button_continue_entered.png"));
@@ -93,20 +113,23 @@ public class PlayOption extends JFrame implements ComponentListener {
 		        			}
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_UP) {
-		        			
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		        			API.Images.setImage(btnnewgame, getClass().getResource("/multimedia/imagens/button_newgame_exited.png"));
 		    				API.Images.setImage(btncontinue, getClass().getResource("/multimedia/imagens/button_continue_exited.png"));
 		    				API.Images.setImage(btnback, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
+		    				opcao = false;
 		    				selected = 3;
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
-		        			
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		        			API.Images.setImage(btnnewgame, getClass().getResource("/multimedia/imagens/button_newgame_exited.png"));
 		    				API.Images.setImage(btncontinue, getClass().getResource("/multimedia/imagens/button_continue_exited.png"));
 		    				API.Images.setImage(btnback, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
+		    				opcao = false;
 		    				selected = 3;
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
                     		switch (selected) {
 	                  		  case 1:
 	                  			System.out.println("Monday1");
@@ -136,17 +159,66 @@ public class PlayOption extends JFrame implements ComponentListener {
 		
 		try {
 			
-			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(getClass().getResource("/multimedia/audios/music.wav").getFile()));
+			InputStream in = getClass().getResourceAsStream("/multimedia/audios/music.wav");
+			InputStream bufferedIn = new BufferedInputStream(in);
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(bufferedIn);
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 			gainControl.setValue((float)(soundfile-84));
 			
-			if (Menu.getTimeMusic() > (34360748*count1)) {
-				count++;
-				count1++;
+			if(menu) {
+				while (Menu.getTimeMusic() > (34360748*count1)) {
+					count++;
+					count1++;
+					count2 = count;
+					count3 = count1;
+					count4 = count;
+					count5 = count1;
+					count6 = count;
+					count7 = count1;
+				}
+				clip.setMicrosecondPosition(Menu.getTimeMusic() - (34360748*count));
+				setMenu(false);
+			} else if(newgame) {
+				while (NewGameOptions.getTimeMusic() > (34360748*count3)) {
+					count2++;
+					count3++;
+					count = count2;
+					count1 = count3;
+					count4 = count;
+					count5 = count1;
+					count6 = count;
+					count7 = count1;
+				}
+				clip.setMicrosecondPosition(NewGameOptions.getTimeMusic() - (34360748*count2));
+				setNewGame(false);
+			} else if(continuegamemult) {
+				while (ContinueGameMulti.getTimeMusic() > (34360748*count5)) {
+					count4++;
+					count5++;
+					count = count2;
+					count1 = count3;
+					count2 = count;
+					count3 = count1;
+					count6 = count;
+					count7 = count1;
+				}
+				clip.setMicrosecondPosition(ContinueGameMulti.getTimeMusic() - (34360748*count4));
+				setContinueGameMulti(false);
+			} else {
+				while (ContinueGameBot.getTimeMusic() > (34360748*count7)) {
+					count6++;
+					count7++;
+					count = count2;
+					count1 = count3;
+					count2 = count;
+					count3 = count1;
+					count4 = count;
+					count5 = count1;
+				}
+				clip.setMicrosecondPosition(ContinueGameBot.getTimeMusic() - (34360748*count6));
 			}
-			clip.setMicrosecondPosition(Menu.getTimeMusic() - (34360748*count));
 			
 			//clip.setMicrosecondPosition(Menu.getTimeMusic());
 			clip.start();
@@ -159,9 +231,66 @@ public class PlayOption extends JFrame implements ComponentListener {
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/multimedia/imagens/logo.png")));
 		setTitle("Quatro em Linha");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Point loc = Menu.getLoca();
-		setBounds(loc.x, loc.y, widthfile, heightfile);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowListener() {
+					@Override
+					public void windowOpened(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowClosing(WindowEvent paramWindowEvent) {
+						
+						exit();
+						
+					}
+					@Override
+					public void windowClosed(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowIconified(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowDeiconified(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowActivated(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+					@Override
+					public void windowDeactivated(WindowEvent paramWindowEvent) {
+						// TODO Auto-generated method stub
+						
+					}
+		});
+		
+		newgameoptionsgui = NewGameOptions.getBool();
+		continuegamegui = ContinueGameMulti.getBool();
+		continuegamebotgui = ContinueGameBot.getBool();
+		
+		if(newgameoptionsgui) {
+			Point loc = NewGameOptions.getLoca();
+			setBounds(loc.x, loc.y, widthfile, heightfile);
+			NewGameOptions.setBool(false);
+		}else if(continuegamegui) {
+			Point loc2 = ContinueGameMulti.getLoca();
+			setBounds(loc2.x, loc2.y, widthfile, heightfile);
+			ContinueGameMulti.setBool(false);
+		}else if(continuegamebotgui) {
+			Point loc2 = ContinueGameBot.getLoca();
+			setBounds(loc2.x, loc2.y, widthfile, heightfile);
+			ContinueGameBot.setBool(false);
+		}else{
+			Point loc1 = Menu.getLoca();
+			setBounds(loc1.x, loc1.y, widthfile, heightfile);
+		}
 		setResizable(false);
 		
 		playoptionPanel = new JPanel(){
@@ -191,6 +320,7 @@ public class PlayOption extends JFrame implements ComponentListener {
 		btnnewgame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				API.Images.setImage(btnnewgame, getClass().getResource("/multimedia/imagens/button_newgame_entered.png"));
 				API.Images.setImage(btncontinue, getClass().getResource("/multimedia/imagens/button_continue_exited.png"));
 				API.Images.setImage(btnback, getClass().getResource("/multimedia/imagens/button_back_exited.png"));
@@ -203,7 +333,19 @@ public class PlayOption extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				
+				setLoca(getLocation());
+				opcao = false;
+				selected = 0;
+				listening = false;
+				NewGameOptions.setPlayop(true);
+				clipTimePostion = clip.getMicrosecondPosition();
+				clip.stop();
+				frame1 = new NewGameOptions();
+				frame1.setVisible(true);
+				
+				dispose();
 			}
 		});
 		btnnewgame.setBounds(164, 310, 296, 112);
@@ -214,6 +356,7 @@ public class PlayOption extends JFrame implements ComponentListener {
 		btncontinue.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				API.Images.setImage(btncontinue, getClass().getResource("/multimedia/imagens/button_continue_entered.png"));
 				API.Images.setImage(btnnewgame, getClass().getResource("/multimedia/imagens/button_newgame_exited.png"));
 				API.Images.setImage(btnback, getClass().getResource("/multimedia/imagens/button_back_exited.png"));
@@ -226,6 +369,121 @@ public class PlayOption extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+				
+				File file = new File("jogo_salvo.ap");
+				if(file.exists()) {
+					
+					String[] fline = new String[] {};
+					try {
+						fline = API.Fichi.read("jogo_salvo.ap").split("\n");
+					}catch(IOException e1){}
+					
+					
+					if(fline[0].contains("multi")) {
+						
+						setLoca(getLocation());
+						opcao = false;
+						selected = 0;
+						listening = false;
+						ContinueGameMulti.setPlayOption(true);
+						clipTimePostion = clip.getMicrosecondPosition();
+						clip.stop();
+						ContinueGameMulti fram;
+						try {
+							fram = new ContinueGameMulti();
+							fram.setVisible(true);
+						} catch (FILException e1) {e1.printStackTrace();}
+						dispose();
+						
+					}else {
+						try {
+							if(fline[0].split(",")[0].contains("botfacil4")) {
+					    		ContinueGameBot.setBotfacil4(true);
+							}else if(fline[0].split(",")[0].contains("botnormal4")) {
+								ContinueGameBot.setBotnormal4(true);
+							}else if(fline[0].split(",")[0].contains("botmedio4")) {
+								ContinueGameBot.setBotmedio4(true);
+							}else if(fline[0].split(",")[0].contains("botdificil4")) {
+								ContinueGameBot.setBotdificil4(true);
+							}else {
+								if(fline[0].split(",")[0].contains("botfacil3")) {
+						    		ContinueGameBot.setBotfacil3(true);
+								}else if(fline[0].split(",")[0].contains("botnormal3")) {
+									ContinueGameBot.setBotnormal3(true);
+								}else if(fline[0].split(",")[0].contains("botmedio3")) {
+									ContinueGameBot.setBotmedio3(true);
+								}else if(fline[0].split(",")[0].contains("botdificil3")) {
+									ContinueGameBot.setBotdificil3(true);
+								}else {
+									if(fline[0].split(",")[0].contains("botfacil2")) {
+							    		ContinueGameBot.setBotfacil2(true);
+									}else if(fline[0].split(",")[0].contains("botnormal2")) {
+										ContinueGameBot.setBotnormal2(true);
+									}else if(fline[0].split(",")[0].contains("botmedio2")) {
+										ContinueGameBot.setBotmedio2(true);
+									}else if(fline[0].split(",")[0].contains("botdificil2")) {
+										ContinueGameBot.setBotdificil2(true);
+									}
+								}
+							}
+						}catch(ArrayIndexOutOfBoundsException e1) {}
+						
+						try {
+							if(fline[0].split(",")[1].contains("botfacil3")) {
+					    		ContinueGameBot.setBotfacil3(true);
+							}else if(fline[0].split(",")[1].contains("botnormal3")) {
+								ContinueGameBot.setBotnormal3(true);
+							}else if(fline[0].split(",")[1].contains("botmedio3")) {
+								ContinueGameBot.setBotmedio3(true);
+							}else if(fline[0].split(",")[1].contains("botdificil3")) {
+								ContinueGameBot.setBotdificil3(true);
+							}else {
+								if(fline[0].split(",")[1].contains("botfacil2")) {
+						    		ContinueGameBot.setBotfacil2(true);
+								}else if(fline[0].split(",")[1].contains("botnormal2")) {
+									ContinueGameBot.setBotnormal2(true);
+								}else if(fline[0].split(",")[1].contains("botmedio2")) {
+									ContinueGameBot.setBotmedio2(true);
+								}else if(fline[0].split(",")[1].contains("botdificil2")) {
+									ContinueGameBot.setBotdificil2(true);
+								}
+							}
+						}catch(ArrayIndexOutOfBoundsException e1) {}
+						
+						try {
+							if(fline[0].split(",")[2].contains("botfacil2")) {
+					    		ContinueGameBot.setBotfacil2(true);
+							}else if(fline[0].split(",")[2].contains("botnormal2")) {
+								ContinueGameBot.setBotnormal2(true);
+							}else if(fline[0].split(",")[2].contains("botmedio2")) {
+								ContinueGameBot.setBotmedio2(true);
+							}else if(fline[0].split(",")[2].contains("botdificil2")) {
+								ContinueGameBot.setBotdificil2(true);
+							}
+						}catch(ArrayIndexOutOfBoundsException e1) {}
+						
+						setLoca(getLocation());
+						opcao = false;
+						selected = 0;
+						listening = false;
+						ContinueGameBot.setPlayOption(true);
+						clipTimePostion = clip.getMicrosecondPosition();
+						clip.stop();
+						ContinueGameBot fram;
+						try {
+							fram = new ContinueGameBot();
+							fram.setVisible(true);
+						} catch (FILException e1) {e1.printStackTrace();}
+						dispose();
+						
+					}
+					
+				}else {
+					listening = false;
+					JOptionPane.showMessageDialog(mainframe, "Não existe um jogo salvo.");
+					listening = true;
+				}
 				
 			}
 		});
@@ -237,6 +495,7 @@ public class PlayOption extends JFrame implements ComponentListener {
 		btnback.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				API.Images.setImage(btnback, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
 				API.Images.setImage(btnnewgame, getClass().getResource("/multimedia/imagens/button_newgame_exited.png"));
 				API.Images.setImage(btncontinue, getClass().getResource("/multimedia/imagens/button_continue_exited.png"));
@@ -249,6 +508,8 @@ public class PlayOption extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+				
 				setLoca(getLocation());
 				opcao = false;
 				selected = 0;
@@ -289,6 +550,28 @@ public class PlayOption extends JFrame implements ComponentListener {
 	public static long getTimeMusic() {
 		return clipTimePostion;
 	}
+	
+	public static void setMenu(boolean menu1) {
+		menu = menu1;
+	}
+	
+	public static void setNewGame(boolean newgame1) {
+		newgame = newgame1;
+	}
+	
+	public static void setContinueGameMulti(boolean continuegamemult1) {
+		continuegamemult = continuegamemult1;
+	}
+	
+	private void exit() {
+		listening = false;
+		Popup fram = new Popup(this, "Tem a certeza que pretende sair ?", soundfile);
+		
+		if(fram.run(widthfile, heightfile)) {
+			System.exit(0);
+		}
+		listening = true;
+    }
 	
 	@Override
 	public void componentHidden(ComponentEvent arg0) {

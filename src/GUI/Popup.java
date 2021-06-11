@@ -5,12 +5,15 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.net.URL;
 import java.awt.Image;
 import java.awt.KeyEventDispatcher;
@@ -33,10 +36,14 @@ public class Popup extends JDialog implements MouseListener {
 	private boolean listening = true;
 	private boolean opcao;
 	private int selected;
-
-	public Popup(Frame parent, String txt) {
+	private int volume;
+	
+	
+	public Popup(Frame parent, String txt, int soundfile) {
 		
 		super(parent,"Confirmação",true);
+		
+		volume = soundfile;
 		
 		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 
@@ -47,6 +54,7 @@ public class Popup extends JDialog implements MouseListener {
 		        	case KeyEvent.KEY_PRESSED:
 		        		if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
 		        			
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", volume);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 		        			if(opcao) {
 		        				API.Images.setImage(btnYes, getClass().getResource("/multimedia/imagens/button_yes_exited.png"));
 			        			API.Images.setImage(btnNo, getClass().getResource("/multimedia/imagens/button_no_entered.png"));
@@ -61,6 +69,7 @@ public class Popup extends JDialog implements MouseListener {
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
 		        			
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", volume);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 		        			if(opcao) {
 		        				API.Images.setImage(btnYes, getClass().getResource("/multimedia/imagens/button_yes_exited.png"));
 			        			API.Images.setImage(btnNo, getClass().getResource("/multimedia/imagens/button_no_entered.png"));
@@ -74,6 +83,8 @@ public class Popup extends JDialog implements MouseListener {
 		        			}
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+		        			
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", volume);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
                     		switch (selected) {
 	                  		  case 1:
 	                  			data = true;
@@ -144,12 +155,18 @@ public class Popup extends JDialog implements MouseListener {
    
 	@Override
 	public void mouseEntered(MouseEvent ae) {
+		
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", volume);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 		Object source = ae.getSource();
 		if (source == btnYes) {
 			API.Images.setImage(btnYes, getClass().getResource("/multimedia/imagens/button_yes_entered.png"));
+			API.Images.setImage(btnNo, getClass().getResource("/multimedia/imagens/button_no_exited.png"));
+			selected = 1;
 		}
 		if (source == btnNo) {
 			API.Images.setImage(btnNo, getClass().getResource("/multimedia/imagens/button_no_entered.png"));
+			API.Images.setImage(btnYes, getClass().getResource("/multimedia/imagens/button_yes_exited.png"));
+			selected = 2;
 		}
 	}
 	
@@ -166,6 +183,8 @@ public class Popup extends JDialog implements MouseListener {
 	
 	@Override
 	public void mouseClicked(MouseEvent ae) {
+		
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", volume);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 		Object source = ae.getSource();
 		if (source == btnYes) {
 			data = true;
