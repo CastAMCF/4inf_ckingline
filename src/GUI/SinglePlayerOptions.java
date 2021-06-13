@@ -107,7 +107,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 	private int ballimagenum2 = 2;
 	private int ballimagenum3 = 3;
 	private int ballimagenum4 = 4;
-	private String[] botconfigtxt = {"Fácil", "Normal", "Médio", "Difícil"};
+	private String[] botconfigtxt = {"FÃ¡cil", "Normal", "MÃ©dio", "DifÃ­cil"};
 	private int botconfigint2 = 0;
 	private int botconfigint3 = 0;
 	private int botconfigint4 = 0;
@@ -127,7 +127,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		        	switch (ke.getID()) {
 		        	case KeyEvent.KEY_PRESSED:
 		        		if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
-		        			
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 		        			if(opcao) {
 		        				API.Images.setImage(btnbegin, getClass().getResource("/multimedia/imagens/button_begin_exited.png"));
 		        				API.Images.setImage(btnback, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
@@ -141,7 +141,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		        			}
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
-		        			
+		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 		        			if(opcao) {
 		        				API.Images.setImage(btnbegin, getClass().getResource("/multimedia/imagens/button_begin_exited.png"));
 		        				API.Images.setImage(btnback, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
@@ -155,12 +155,15 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		        			}
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+		        			
                     		switch (selected) {
 	                  		  case 1:
-	                  			System.out.println("Monday3");
+	                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+	                  			begin();
 	                  		    break;
 	                  		  case 2:
-	                  			System.out.println("Tuesday3");
+	                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+	                  			back();
 	                  		    break;
 	                  		}
                         }
@@ -297,6 +300,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		btnbegin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(btnbegin, getClass().getResource("/multimedia/imagens/button_begin_entered.png"));
 				API.Images.setImage(btnback, getClass().getResource("/multimedia/imagens/button_back_exited.png"));
 				
@@ -310,118 +314,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				setLoca(getLocation());
-				opcao = false;
-        		selected = 0;
-				listening = false;
-				BeginGameBot.setSinglePlayerOption(true);
-				
-				BeginGameBot.setX(numlines);
-				BeginGameBot.setY(numcolumns);
-				BeginGameBot.setLinha(numcheck);
-				BeginGameBot.setJogador1nome(txtJogador_1.getText());
-				BeginGameBot.setJogador2nome(txtJogador_2.getText());
-				BeginGameBot.setJogador3nome(txtJogador_3.getText());
-				BeginGameBot.setJogador4nome(txtJogador_4.getText());
-				BeginGameBot.setImage1("ball" + ballimagenum1 + ".png");
-				BeginGameBot.setImage2("ball" + ballimagenum2 + ".png");
-				BeginGameBot.setImage3("ball" + ballimagenum3 + ".png");
-				BeginGameBot.setImage4("ball" + ballimagenum4 + ".png");
-				
-				BeginGameBot.setPlayer1("#");
-				if(numbots == 3) {
-					BeginGameBot.setPlayer2("@");
-					BeginGameBot.setPlayer3("&");
-					BeginGameBot.setPlayer4("$");
-				}else if(numbots == 2) {
-					BeginGameBot.setPlayer2("@");
-					BeginGameBot.setPlayer3("&");
-					BeginGameBot.setPlayer4("");
-				}else {
-					BeginGameBot.setPlayer2("@");
-					BeginGameBot.setPlayer3("");
-					BeginGameBot.setPlayer4("");
-				}
-				
-				if(botconfigint2 == 3) {
-					BeginGameBot.setBotfacil2(false);
-					BeginGameBot.setBotnormal2(false);
-					BeginGameBot.setBotmedio2(false);
-					BeginGameBot.setBotdificil2(true);
-				}else if(botconfigint2 == 2) {
-					BeginGameBot.setBotfacil2(false);
-					BeginGameBot.setBotnormal2(false);
-					BeginGameBot.setBotmedio2(true);
-					BeginGameBot.setBotdificil2(false);
-				}else if(botconfigint2 == 1) {
-					BeginGameBot.setBotfacil2(false);
-					BeginGameBot.setBotnormal2(true);
-					BeginGameBot.setBotmedio2(false);
-					BeginGameBot.setBotdificil2(false);
-				}else {
-					BeginGameBot.setBotfacil2(true);
-					BeginGameBot.setBotnormal2(false);
-					BeginGameBot.setBotmedio2(false);
-					BeginGameBot.setBotdificil2(false);
-				}
-				
-				if(botconfigint3 == 3) {
-					BeginGameBot.setBotfacil3(false);
-					BeginGameBot.setBotnormal3(false);
-					BeginGameBot.setBotmedio3(false);
-					BeginGameBot.setBotdificil3(true);
-				}else if(botconfigint3 == 2) {
-					BeginGameBot.setBotfacil3(false);
-					BeginGameBot.setBotnormal3(false);
-					BeginGameBot.setBotmedio3(true);
-					BeginGameBot.setBotdificil3(false);
-				}else if(botconfigint3 == 1) {
-					BeginGameBot.setBotfacil3(false);
-					BeginGameBot.setBotnormal3(true);
-					BeginGameBot.setBotmedio3(false);
-					BeginGameBot.setBotdificil3(false);
-				}else {
-					BeginGameBot.setBotfacil3(true);
-					BeginGameBot.setBotnormal3(false);
-					BeginGameBot.setBotmedio3(false);
-					BeginGameBot.setBotdificil3(false);
-				}
-				
-				if(botconfigint4 == 3) {
-					BeginGameBot.setBotfacil4(false);
-					BeginGameBot.setBotnormal4(false);
-					BeginGameBot.setBotmedio4(false);
-					BeginGameBot.setBotdificil4(true);
-				}else if(botconfigint4 == 2) {
-					BeginGameBot.setBotfacil4(false);
-					BeginGameBot.setBotnormal4(false);
-					BeginGameBot.setBotmedio4(true);
-					BeginGameBot.setBotdificil4(false);
-				}else if(botconfigint4 == 1) {
-					BeginGameBot.setBotfacil4(false);
-					BeginGameBot.setBotnormal4(true);
-					BeginGameBot.setBotmedio4(false);
-					BeginGameBot.setBotdificil4(false);
-				}else {
-					BeginGameBot.setBotfacil4(true);
-					BeginGameBot.setBotnormal4(false);
-					BeginGameBot.setBotmedio4(false);
-					BeginGameBot.setBotdificil4(false);
-				}
-				
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				BeginGameBot fram;
-				try {
-					fram = new BeginGameBot();
-					fram.setVisible(true);
-				} catch (FILException e1) {
-					e1.printStackTrace();
-				}
-				
-				dispose();
-				
+				begin();
 			}
 		});
 		btnbegin.setBounds(520, 626, 296, 112);
@@ -432,6 +325,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		btnback.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(btnback, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
 				API.Images.setImage(btnbegin, getClass().getResource("/multimedia/imagens/button_begin_exited.png"));
 				
@@ -444,17 +338,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setLoca(getLocation());
-				opcao = false;
-        		selected = 0;
-				listening = false;
-				NewGameOptions.setSingleop(true);
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				frame = new NewGameOptions();
-				frame.setVisible(true);
-				
-				dispose();
+				back();
 			}
 		});
 		btnback.setBounds(48, 626, 296, 112);
@@ -468,6 +352,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadir_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadir_1, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -476,7 +361,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				ballimagenum1++;
             	if(ballimagenum1 > 28)
             		ballimagenum1 = 1;
@@ -498,6 +383,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesq_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesq_1, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -506,7 +392,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				ballimagenum1--;
         		if(ballimagenum1 < 1)
         			ballimagenum1 = 28;
@@ -541,6 +427,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadir_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadir_2, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -549,7 +436,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				ballimagenum2++;
             	if(ballimagenum2 > 28)
             		ballimagenum2 = 1;
@@ -571,6 +458,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesq_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesq_2, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -579,7 +467,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				ballimagenum2--;
         		if(ballimagenum2 < 1)
         			ballimagenum2 = 28;
@@ -596,6 +484,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesqdif_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesqdif_2, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -604,7 +493,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				botconfigint2--;
         		if(botconfigint2 < 0)
         			botconfigint2 = 3;
@@ -627,6 +516,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadirdif_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadirdif_2, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -635,7 +525,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				botconfigint2++;
             	if(botconfigint2 > 3)
             		botconfigint2 = 0;
@@ -669,6 +559,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadir_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadir_3, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -677,7 +568,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				ballimagenum3++;
             	if(ballimagenum3 > 28)
             		ballimagenum3 = 1;
@@ -699,6 +590,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesq_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesq_3, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -707,7 +599,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				ballimagenum3--;
         		if(ballimagenum3 < 1)
         			ballimagenum3 = 28;
@@ -724,6 +616,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesqdif_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesqdif_3, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -732,7 +625,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				botconfigint3--;
         		if(botconfigint3 < 0)
         			botconfigint3 = 3;
@@ -755,6 +648,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadirdif_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadirdif_3, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -763,7 +657,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				botconfigint3++;
             	if(botconfigint3 > 3)
             		botconfigint3 = 0;
@@ -797,6 +691,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadir_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadir_4, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -805,7 +700,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				ballimagenum4++;
             	if(ballimagenum4 > 28)
             		ballimagenum4 = 1;
@@ -827,6 +722,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesq_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesq_4, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -835,7 +731,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				ballimagenum4--;
         		if(ballimagenum4 < 1)
         			ballimagenum4 = 28;
@@ -852,6 +748,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesqdif_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesqdif_4, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -860,7 +757,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				botconfigint4--;
         		if(botconfigint4 < 0)
         			botconfigint4 = 3;
@@ -883,6 +780,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadirdif_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadirdif_4, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -891,7 +789,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				botconfigint4++;
             	if(botconfigint4 > 3)
             		botconfigint4 = 0;
@@ -930,6 +828,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesq_numlines.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesq_numlines, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -938,7 +837,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				numlines--;
         		if(numlines < 1)
         			numlines = 7;
@@ -961,6 +860,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadir_numlines.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadir_numlines, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -969,7 +869,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				numlines++;
             	if(numlines > 7)
             		numlines = 1;
@@ -992,6 +892,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesq_numcolumns.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesq_numcolumns, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -1000,7 +901,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				numcolumns--;
         		if(numcolumns < 1)
         			numcolumns = 10;
@@ -1023,6 +924,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadir_numcolumns.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadir_numcolumns, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -1031,7 +933,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				numcolumns++;
             	if(numcolumns > 10)
             		numcolumns = 1;
@@ -1054,6 +956,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesq_numpecheck.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesq_numpecheck, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -1062,7 +965,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				numcheck--;
         		if(numcheck < 1)
         			numcheck = 10;
@@ -1085,6 +988,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadir_numpecheck.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadir_numpecheck, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -1093,7 +997,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				numcheck++;
             	if(numcheck > 10)
             		numcheck = 1;
@@ -1110,6 +1014,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setaesqnumbot.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setaesqnumbot, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -1118,7 +1023,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				numbots--;
 				if(numbots < 1)
 					numbots = 3;
@@ -1203,6 +1108,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		setadirnumbot.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(setadirnumbot, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -1211,7 +1117,7 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				numbots++;
             	if(numbots > 3)
             		numbots = 1;
@@ -1330,9 +1236,138 @@ public class SinglePlayerOptions extends JFrame implements ComponentListener {
 		return clipTimePostion;
 	}
 	
+	private void begin() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		setLoca(getLocation());
+		opcao = false;
+		selected = 0;
+		listening = false;
+		BeginGameBot.setSinglePlayerOption(true);
+		
+		BeginGameBot.setX(numlines);
+		BeginGameBot.setY(numcolumns);
+		BeginGameBot.setLinha(numcheck);
+		BeginGameBot.setJogador1nome(txtJogador_1.getText());
+		BeginGameBot.setJogador2nome(txtJogador_2.getText());
+		BeginGameBot.setJogador3nome(txtJogador_3.getText());
+		BeginGameBot.setJogador4nome(txtJogador_4.getText());
+		BeginGameBot.setImage1("ball" + ballimagenum1 + ".png");
+		BeginGameBot.setImage2("ball" + ballimagenum2 + ".png");
+		BeginGameBot.setImage3("ball" + ballimagenum3 + ".png");
+		BeginGameBot.setImage4("ball" + ballimagenum4 + ".png");
+		
+		BeginGameBot.setPlayer1("#");
+		if(numbots == 3) {
+			BeginGameBot.setPlayer2("@");
+			BeginGameBot.setPlayer3("&");
+			BeginGameBot.setPlayer4("$");
+		}else if(numbots == 2) {
+			BeginGameBot.setPlayer2("@");
+			BeginGameBot.setPlayer3("&");
+			BeginGameBot.setPlayer4("");
+		}else {
+			BeginGameBot.setPlayer2("@");
+			BeginGameBot.setPlayer3("");
+			BeginGameBot.setPlayer4("");
+		}
+		
+		if(botconfigint2 == 3) {
+			BeginGameBot.setBotfacil2(false);
+			BeginGameBot.setBotnormal2(false);
+			BeginGameBot.setBotmedio2(false);
+			BeginGameBot.setBotdificil2(true);
+		}else if(botconfigint2 == 2) {
+			BeginGameBot.setBotfacil2(false);
+			BeginGameBot.setBotnormal2(false);
+			BeginGameBot.setBotmedio2(true);
+			BeginGameBot.setBotdificil2(false);
+		}else if(botconfigint2 == 1) {
+			BeginGameBot.setBotfacil2(false);
+			BeginGameBot.setBotnormal2(true);
+			BeginGameBot.setBotmedio2(false);
+			BeginGameBot.setBotdificil2(false);
+		}else {
+			BeginGameBot.setBotfacil2(true);
+			BeginGameBot.setBotnormal2(false);
+			BeginGameBot.setBotmedio2(false);
+			BeginGameBot.setBotdificil2(false);
+		}
+		
+		if(botconfigint3 == 3) {
+			BeginGameBot.setBotfacil3(false);
+			BeginGameBot.setBotnormal3(false);
+			BeginGameBot.setBotmedio3(false);
+			BeginGameBot.setBotdificil3(true);
+		}else if(botconfigint3 == 2) {
+			BeginGameBot.setBotfacil3(false);
+			BeginGameBot.setBotnormal3(false);
+			BeginGameBot.setBotmedio3(true);
+			BeginGameBot.setBotdificil3(false);
+		}else if(botconfigint3 == 1) {
+			BeginGameBot.setBotfacil3(false);
+			BeginGameBot.setBotnormal3(true);
+			BeginGameBot.setBotmedio3(false);
+			BeginGameBot.setBotdificil3(false);
+		}else {
+			BeginGameBot.setBotfacil3(true);
+			BeginGameBot.setBotnormal3(false);
+			BeginGameBot.setBotmedio3(false);
+			BeginGameBot.setBotdificil3(false);
+		}
+		
+		if(botconfigint4 == 3) {
+			BeginGameBot.setBotfacil4(false);
+			BeginGameBot.setBotnormal4(false);
+			BeginGameBot.setBotmedio4(false);
+			BeginGameBot.setBotdificil4(true);
+		}else if(botconfigint4 == 2) {
+			BeginGameBot.setBotfacil4(false);
+			BeginGameBot.setBotnormal4(false);
+			BeginGameBot.setBotmedio4(true);
+			BeginGameBot.setBotdificil4(false);
+		}else if(botconfigint4 == 1) {
+			BeginGameBot.setBotfacil4(false);
+			BeginGameBot.setBotnormal4(true);
+			BeginGameBot.setBotmedio4(false);
+			BeginGameBot.setBotdificil4(false);
+		}else {
+			BeginGameBot.setBotfacil4(true);
+			BeginGameBot.setBotnormal4(false);
+			BeginGameBot.setBotmedio4(false);
+			BeginGameBot.setBotdificil4(false);
+		}
+		
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		BeginGameBot fram;
+		try {
+			fram = new BeginGameBot();
+			fram.setVisible(true);
+		} catch (FILException e1) {
+			e1.printStackTrace();
+		}
+		
+		dispose();
+	}
+	
+	private void back() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		setLoca(getLocation());
+		opcao = false;
+		selected = 0;
+		listening = false;
+		NewGameOptions.setSingleop(true);
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		frame = new NewGameOptions();
+		frame.setVisible(true);
+		
+		dispose();
+	}
+	
 	private void exit() {
 		listening = false;
-		Popup fram = new Popup(this, "Tem a certeza que pretende sair ?", soundfile);
+		PopupTwoOptions fram = new PopupTwoOptions(this, "Tem a certeza que pretende sair ?", soundfile);
 		
 		if(fram.run(widthfile, heightfile)) {
 			System.exit(0);

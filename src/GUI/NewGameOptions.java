@@ -244,19 +244,23 @@ public class NewGameOptions extends JFrame implements ComponentListener {
 		    				selected = 4;
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
-		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		        			
                     		switch (selected) {
 	                  		  case 1:
-	                  			System.out.println("Monday2");
+	                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+	                  			singleplgui();
 	                  		    break;
 	                  		  case 2:
-	                  			System.out.println("Tuesday2");
+	                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+	                  			multiplgui();
 	                  		    break;
 	                  		  case 3:
-	                  			System.out.println("Wednesday2");
+	                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+	                  			mysterygui();
 	                  		    break;
 	                  		  case 4:
-	                  			System.out.println("Thursday2");
+	                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+	                  			back();
 	                  		    break;
 	                  		}
                         }
@@ -434,21 +438,7 @@ public class NewGameOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				
-				setLoca(getLocation());
-				singleplayer = false;
-        		multiplayer = false;
-        		online = false;
-        		selected = 0;
-				listening = false;
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				SinglePlayerOptions frame = new SinglePlayerOptions();
-				frame.setVisible(true);
-				
-				dispose();
-				
+				singleplgui();
 			}
 		});
 		btnsingleplayer.setBounds(43, 313, 296, 112);
@@ -475,21 +465,7 @@ public class NewGameOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				
-				setLoca(getLocation());
-				singleplayer = false;
-        		multiplayer = false;
-        		online = false;
-        		selected = 0;
-				listening = false;
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				MultiPlayerOptions frame = new MultiPlayerOptions();
-				frame.setVisible(true);
-				
-				dispose();
-				
+				multiplgui();
 			}
 		});
 		btnmultiplayer.setBounds(363, 310, 296, 112);
@@ -515,8 +491,7 @@ public class NewGameOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				
+				mysterygui();
 			}
 		});
 		btnonline.setBounds(671, 307, 296, 112);
@@ -544,21 +519,7 @@ public class NewGameOptions extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				
-				setLoca(getLocation());
-				singleplayer = false;
-        		multiplayer = false;
-        		online = false;
-        		selected = 0;
-				listening = false;
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				PlayOption.setNewGame(true);
-				frame = new PlayOption();
-				frame.setVisible(true);
-				
-				dispose();
+				back();
 			}
 		});
 		btnback.setBounds(354, 566, 296, 112);
@@ -598,9 +559,66 @@ public class NewGameOptions extends JFrame implements ComponentListener {
 		playop = playop1;
 	}
 	
+	private void singleplgui() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		
+		setLoca(getLocation());
+		singleplayer = false;
+		multiplayer = false;
+		online = false;
+		selected = 0;
+		listening = false;
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		SinglePlayerOptions frame = new SinglePlayerOptions();
+		frame.setVisible(true);
+		
+		dispose();
+	}
+	
+	private void multiplgui() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		
+		setLoca(getLocation());
+		singleplayer = false;
+		multiplayer = false;
+		online = false;
+		selected = 0;
+		listening = false;
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		MultiPlayerOptions frame = new MultiPlayerOptions();
+		frame.setVisible(true);
+		
+		dispose();
+	}
+	
+	private void mysterygui() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		
+	}
+	
+	private void back() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		
+		setLoca(getLocation());
+		singleplayer = false;
+		multiplayer = false;
+		online = false;
+		selected = 0;
+		listening = false;
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		PlayOption.setNewGame(true);
+		frame = new PlayOption();
+		frame.setVisible(true);
+		
+		dispose();
+	}
+	
 	private void exit() {
 		listening = false;
-		Popup fram = new Popup(this, "Tem a certeza que pretende sair ?", soundfile);
+		PopupTwoOptions fram = new PopupTwoOptions(this, "Tem a certeza que pretende sair ?", soundfile);
 		
 		if(fram.run(widthfile, heightfile)) {
 			System.exit(0);

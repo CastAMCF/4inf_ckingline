@@ -38,7 +38,7 @@ public final class Board {
     	int y = board.length - 1;
     	
         if (x < 0 || x >= board[0].length) {
-            throw new FILException("Sítio errado");
+            throw new FILException("SÃ­tio errado");
         }
         
         if (!board[y][x].isEmpty()) {

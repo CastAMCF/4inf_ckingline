@@ -51,15 +51,19 @@ import javax.swing.JSlider;
 
 public class Menu extends JFrame implements ComponentListener {
 	
+	private Menu frame;
 	private Clip clip;
 	private JPanel contentPane;
 	private JLabel label_play;
 	private JLabel label_options;
 	private JLabel label_exit;
 	private JLabel label_logo;
+	private JLabel label_rules;
+	private JLabel label_about;
 	private boolean play;
 	private boolean options;
 	private boolean exit;
+	private boolean opcao;
 	private int selected;
 	private boolean listening = true;
 	private static Point loc;
@@ -113,6 +117,8 @@ public class Menu extends JFrame implements ComponentListener {
 	                        			API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_entered.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		options = false;
 		                        		play = false;
 		                        		exit = true;
@@ -121,6 +127,8 @@ public class Menu extends JFrame implements ComponentListener {
 		                        		API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_entered.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		play = false;
 		                        		options = true;
 		                        		exit = false;
@@ -131,6 +139,8 @@ public class Menu extends JFrame implements ComponentListener {
 	                        			API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_entered.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		play = true;
 		                        		options = false;
 		                        		exit = false;
@@ -139,6 +149,8 @@ public class Menu extends JFrame implements ComponentListener {
 		                        		API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_entered.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		options = false;
 		                        		play = false;
 		                        		exit = true;
@@ -149,6 +161,8 @@ public class Menu extends JFrame implements ComponentListener {
 	                        			API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_entered.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		options = true;
 		                        		play = false;
 		                        		exit = false;
@@ -157,6 +171,8 @@ public class Menu extends JFrame implements ComponentListener {
 		                        		API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_entered.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		exit = false;
 		                        		play = true;
 		                        		options = false;
@@ -166,6 +182,8 @@ public class Menu extends JFrame implements ComponentListener {
 	                        		API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 	                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 	                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_entered.png"));
+	                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+	                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 	                        		play = true;
 	                        		options = false;
 	                        		exit = false;
@@ -180,6 +198,8 @@ public class Menu extends JFrame implements ComponentListener {
 	                        			API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_entered.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		options = false;
 		                        		play = false;
 		                        		exit = true;
@@ -188,6 +208,8 @@ public class Menu extends JFrame implements ComponentListener {
 		                        		API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_entered.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		play = false;
 		                        		options = false;
 		                        		exit = true;
@@ -198,6 +220,8 @@ public class Menu extends JFrame implements ComponentListener {
 	                        			API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_entered.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		play = false;
 		                        		options = false;
 		                        		exit = true;
@@ -206,6 +230,8 @@ public class Menu extends JFrame implements ComponentListener {
 		                        		API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_entered.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		options = false;
 		                        		play = true;
 		                        		exit = false;
@@ -216,6 +242,8 @@ public class Menu extends JFrame implements ComponentListener {
 	                        			API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_entered.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		options = false;
 		                        		play = true;
 		                        		exit = false;
@@ -224,6 +252,8 @@ public class Menu extends JFrame implements ComponentListener {
 		                        		API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 		                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_entered.png"));
 		                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+		                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+		                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		                        		exit = false;
 		                        		play = false;
 		                        		options = true;
@@ -233,24 +263,74 @@ public class Menu extends JFrame implements ComponentListener {
 	                        		API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 	                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_entered.png"));
 	                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+	                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+	                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 	                        		play = false;
 	                        		options = true;
 	                        		exit = false;
 	                        		selected = 3;
 	                        	}
 	                        	
-	                        }else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
-	                        	
-	                        	try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+	                        }else if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
+			        			
+			        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+			        			if(opcao) {API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
+	                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
+	                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+	                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+	                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_entered.png"));
+				        			opcao = false;
+				        			selected = 5;
+			        			}else {API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
+	                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
+	                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+	                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_entered.png"));
+	                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
+				        			opcao = true;
+				        			selected = 4;
+			        			}
+			        			
+			        		}else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
+			        			
+			        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+			        			if(opcao) {API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
+	                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
+	                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+	                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+	                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_entered.png"));
+				        			opcao = false;
+				        			selected = 5;
+			        			}else {API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
+	                        		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
+	                        		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+	                        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_entered.png"));
+	                				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
+				        			opcao = true;
+				        			selected = 4;
+			        			}
+			        			
+			        		}else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+			        			
 	                    		switch (selected) {
 		                  		  case 1:
-		                  		    System.out.println("Monday");
+		                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+		                  		    playoptionsgui();
 		                  		    break;
 		                  		  case 2:
-		                  		    System.out.println("Tuesday");
+		                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+		                  		    optionsgui();
 		                  		    break;
 		                  		  case 3:
+		                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 		                  		    exit();
+		                  		    break;
+		                  		  case 4:
+		                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+		                  			rulesgui();
+		                  			break;
+		                  		  case 5:
+		                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+		                  			aboutgui();
 		                  		    break;
 		                  		}
 	                        }
@@ -397,6 +477,8 @@ public class Menu extends JFrame implements ComponentListener {
 				API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 				API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
         		API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+        		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
         		play = false;
         		options = false;
         		exit = false;
@@ -418,6 +500,8 @@ public class Menu extends JFrame implements ComponentListener {
 				API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
 				API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_entered.png"));
 				API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
+				API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 				play = true;
 				selected = 2;
 			}
@@ -429,20 +513,7 @@ public class Menu extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				setLoca(getLocation());
-				play = false;
-				options = false;
-				exit = false;
-				selected = 0;
-				listening = false;
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				PlayOption.setMenu(true);
-				PlayOption frame = new PlayOption();
-				frame.setVisible(true);
-				
-				dispose();
+				playoptionsgui();
 			}
 		});
 		
@@ -461,6 +532,8 @@ public class Menu extends JFrame implements ComponentListener {
 				API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_entered.png"));
 				API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
 				API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
+				API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 				options = true;
 				selected = 2;
 			}
@@ -472,19 +545,7 @@ public class Menu extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				setLoca(getLocation());
-				play = false;
-				options = false;
-				exit = false;
-				selected = 0;
-				listening = false;
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				Options frame = new Options();
-				frame.setVisible(true);
-				
-				dispose();
+				optionsgui();
 			}
 		});
 		label_options.setBounds(350, 442, 296, 112);
@@ -499,6 +560,8 @@ public class Menu extends JFrame implements ComponentListener {
 				API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_entered.png"));
 				API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
 				API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
+				API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 				exit = true;
 				selected = 3;
 			}
@@ -518,36 +581,57 @@ public class Menu extends JFrame implements ComponentListener {
 		API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 		contentPane.add(label_exit);
 		
-		JLabel label_rules = new JLabel();
+		label_rules = new JLabel();
 		label_rules.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
-				API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_entered.png"));
+				API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
 				API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
 				API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
-				exit = true;
-				selected = 3;
+				API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_entered.png"));
+				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
+				opcao = true;
+				selected = 4;
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
+				API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
 				exit = false;
 				selected = 0;
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				
-				
-				
+				rulesgui();
 			}
 		});
 		label_rules.setBounds(496, 661, 236, 92);
 		API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
 		contentPane.add(label_rules);
 		
-		JLabel label_about = new JLabel();
+		label_about = new JLabel();
+		label_about.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+				API.Images.setImage(label_exit, getClass().getResource("/multimedia/imagens/button_exit_exited.png"));
+				API.Images.setImage(label_play, getClass().getResource("/multimedia/imagens/button_play_exited.png"));
+				API.Images.setImage(label_options, getClass().getResource("/multimedia/imagens/button_options_exited.png"));
+				API.Images.setImage(label_rules, getClass().getResource("/multimedia/imagens/button_rules_exited.png"));
+				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_entered.png"));
+				selected = 5;
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
+				exit = false;
+				selected = 0;
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				aboutgui();
+			}
+		});
 		label_about.setBounds(744, 661, 236, 92);
 		API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 		contentPane.add(label_about);
@@ -577,17 +661,60 @@ public class Menu extends JFrame implements ComponentListener {
 		
 	}
 	
-	private void playoptioGui() {
+	private void aboutgui() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		
-    }
+		listening = false;
+		PopupAbout dialog = new PopupAbout(this, soundfile);
+		dialog.run(widthfile, heightfile);
+		listening = true;
+	}
 	
-	private void optionGui() {
+	private void rulesgui() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		
-    }
+		listening = false;
+		PopupRules dialog = new PopupRules(this, soundfile);
+		dialog.run(widthfile, heightfile);
+		listening = true;
+	}
+	
+	private void playoptionsgui() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		setLoca(getLocation());
+		play = false;
+		options = false;
+		exit = false;
+		selected = 0;
+		listening = false;
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		PlayOption.setMenu(true);
+		PlayOption frame = new PlayOption();
+		frame.setVisible(true);
+		
+		dispose();
+	}
+	
+	private void optionsgui() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		setLoca(getLocation());
+		play = false;
+		options = false;
+		exit = false;
+		selected = 0;
+		listening = false;
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		Options frame = new Options();
+		frame.setVisible(true);
+		
+		dispose();
+	}
 	
 	private void exit() {
 		listening = false;
-		Popup fram = new Popup(this, "Tem a certeza que pretende sair ?", soundfile);
+		PopupTwoOptions fram = new PopupTwoOptions(this, "Tem a certeza que pretende sair ?", soundfile);
 		
 		if(fram.run(widthfile, heightfile)) {
 			System.exit(0);

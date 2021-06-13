@@ -153,8 +153,6 @@ public class BeginGameBot extends JFrame implements ComponentListener {
 				        		
 		                    	updateball();
 		                    	
-		                    	try {  API.Sounds.PlaySound("/multimedia/audios/piece_change.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-		                    	
 				        	}else if (ke.getKeyCode() == vk1) {
 				        		
 				        		countplac--;
@@ -162,8 +160,6 @@ public class BeginGameBot extends JFrame implements ComponentListener {
 		                    		countplac = y-1;
 				        		
 				        		updateball();
-				        		
-				        		try {  API.Sounds.PlaySound("/multimedia/audios/piece_change.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				        		
 				        	}else if (ke.getKeyCode() == vk3) {
 	                        	
@@ -388,6 +384,27 @@ public class BeginGameBot extends JFrame implements ComponentListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JLabel label_back = new JLabel();
+		label_back.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+				API.Images.setImage(label_back, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				API.Images.setImage(label_back, getClass().getResource("/multimedia/imagens/button_back_exited.png"));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+				back();
+			}
+		});
+		label_back.setBounds(744, 661, 236, 92);
+		API.Images.setImage(label_back, getClass().getResource("/multimedia/imagens/button_back_exited.png"));
+		contentPane.add(label_back);
 		
 		int hei = 0;
 		int wit = 0;
@@ -699,81 +716,56 @@ public class BeginGameBot extends JFrame implements ComponentListener {
 		switch (num) {
     	case 0:
     		checktable(pecs0, num, jogador);
+    		pecs0++;
 			game.playPiece(num);
     		break;
     	case 1:
     		checktable(pecs1, num, jogador);
+    		pecs1++;
 			game.playPiece(num);
     		break;
     	case 2:
     		checktable(pecs2, num, jogador);
+    		pecs2++;
     		game.playPiece(num);
     		break;
     	case 3:
     		checktable(pecs3, num, jogador);
+    		pecs3++;
     		game.playPiece(num);
     		break;
     	case 4:
     		checktable(pecs4, num, jogador);
+    		pecs4++;
     		game.playPiece(num);
     		break;
     	case 5:
     		checktable(pecs5, num, jogador);
+    		pecs5++;
     		game.playPiece(num);
     		break;
     	case 6:
     		checktable(pecs6, num, jogador);
+    		pecs6++;
     		game.playPiece(num);
     		break;
     	case 7:
     		checktable(pecs7, num, jogador);
+    		pecs7++;
     		game.playPiece(num);
     		break;
     	case 8:
     		checktable(pecs8, num, jogador);
+    		pecs8++;
     		game.playPiece(num);
     		break;
     	case 9:
     		checktable(pecs9, num, jogador);
+    		pecs9++;
     		game.playPiece(num);
     		break;
     	}
 		
-	}
-	
-	private void validation(int inte) {
-		switch (inte) {
-    	case 0:
-    		pecs0++;
-    		break;
-    	case 1:
-    		pecs1++;
-    		break;
-    	case 2:
-    		pecs2++;
-    		break;
-    	case 3:
-    		pecs3++;
-    		break;
-    	case 4:
-    		pecs4++;
-    		break;
-    	case 5:
-    		pecs5++;
-    		break;
-    	case 6:
-    		pecs6++;
-    		break;
-    	case 7:
-    		pecs7++;
-    		break;
-    	case 8:
-    		pecs8++;
-    		break;
-    	case 9:
-    		pecs9++;
-    		break;
-    	}
 	}
 	
 	private void updateball() {
@@ -813,7 +805,6 @@ public class BeginGameBot extends JFrame implements ComponentListener {
                             	
                             	try {  API.Sounds.PlaySound("/multimedia/audios/piece_dropped.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
                             	
-                            	validation(lin);
                             	chekagens();
                             	changePl();
                             	
@@ -1055,10 +1046,17 @@ public class BeginGameBot extends JFrame implements ComponentListener {
 				}
 			}
 			
-			JOptionPane.showMessageDialog(this, jogadore + " Wins !!!");
+			if (jogadore == jogadoresnames[0]) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/win_game.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+			}else {
+				try {  API.Sounds.PlaySound("/multimedia/audios/lose_game.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+			}
+			
+			PopupOneOption dialog = new PopupOneOption(this, jogadore + " Venceu !!!", soundfile);
+    		dialog.run(widthfile, heightfile);
 			
 			
-			Popup fram = new Popup(this, "Quer voltar a jogar com as mesmas opções?", soundfile);
+			PopupTwoOptions fram = new PopupTwoOptions(this, "Quer voltar a jogar com as mesmas opÃ§Ãµes?", soundfile);
         	
         	try {
 				game.restart();
@@ -1104,10 +1102,13 @@ public class BeginGameBot extends JFrame implements ComponentListener {
 			}
         }
         if (game.myBord.isFull()) {
-        	JOptionPane.showMessageDialog(this, "Tie Game !!!");
+        	try {  API.Sounds.PlaySound("/multimedia/audios/lose_game.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+        	
+        	PopupOneOption dialog = new PopupOneOption(this, "Empate !!!", soundfile);
+    		dialog.run(widthfile, heightfile);
         	
         	
-        	Popup fram = new Popup(this, "Quer voltar a jogar com as mesmas opções?", soundfile);
+        	PopupTwoOptions fram = new PopupTwoOptions(this, "Quer voltar a jogar com as mesmas opÃ§Ãµes?", soundfile);
 			
         	try {
 				game.restart();
@@ -1177,7 +1178,7 @@ public class BeginGameBot extends JFrame implements ComponentListener {
 	private void exit() {
 		listening = false;
 		listeningmous = false;
-		Popup fram = new Popup(this, "Tem a certeza que pretende sair ?", soundfile);
+		PopupTwoOptions fram = new PopupTwoOptions(this, "Tem a certeza que pretende sair ?", soundfile);
 		
 		if(fram.run(widthfile, heightfile)) {
 			System.exit(0);
@@ -1185,6 +1186,40 @@ public class BeginGameBot extends JFrame implements ComponentListener {
 		listening = true;
 		listeningmous = true;
     }
+	
+	private void back() {
+		PopupTwoOptions fram = new PopupTwoOptions(this, "Deseja sair do jogo atual ?", soundfile);
+    	
+		
+		if(fram.run(widthfile, heightfile)) {
+			try {
+				game.restart();
+			} catch (FILException e1) {e1.printStackTrace();}
+			
+			botfacil2 = false;
+        	botnormal2 = false;
+        	botmedio2 = false;
+        	botdificil2 = false;
+        	botfacil3 = false;
+        	botnormal3 = false;
+        	botmedio3 = false;
+        	botdificil3 = false;
+        	botfacil4 = false;
+        	botnormal4 = false;
+        	botmedio4 = false;
+        	botdificil4 = false;
+			
+			setLoca(getLocation());
+			listening = false;
+			listeningmous = false;
+			clipTimePostion = clip.getMicrosecondPosition();
+			clip.stop();
+			SinglePlayerOptions frm = new SinglePlayerOptions();
+			frm.setVisible(true);
+			
+			dispose();
+		}
+	}
 	
 	public static void setSinglePlayerOption(boolean singleplayeroptiongui1) {
 		singleplayeroptiongui = singleplayeroptiongui1;

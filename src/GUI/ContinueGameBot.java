@@ -148,8 +148,6 @@ public class ContinueGameBot extends JFrame {
 				        		
 		                    	updateball();
 		                    	
-		                    	try {  API.Sounds.PlaySound("/multimedia/audios/piece_change.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-		                    	
 				        	}else if (ke.getKeyCode() == vk1) {
 				        		
 				        		countplac--;
@@ -157,8 +155,6 @@ public class ContinueGameBot extends JFrame {
 		                    		countplac = y-1;
 				        		
 				        		updateball();
-				        		
-				        		try {  API.Sounds.PlaySound("/multimedia/audios/piece_change.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				        		
 				        	}else if (ke.getKeyCode() == vk3) {
 	                        	
@@ -378,11 +374,32 @@ public class ContinueGameBot extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel label_back = new JLabel();
+		label_back.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+				API.Images.setImage(label_back, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				API.Images.setImage(label_back, getClass().getResource("/multimedia/imagens/button_back_exited.png"));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+				back();
+			}
+		});
+		label_back.setBounds(744, 661, 236, 92);
+		API.Images.setImage(label_back, getClass().getResource("/multimedia/imagens/button_back_exited.png"));
+		contentPane.add(label_back);
+		
 		String[] str = new String[] {};
 		try {
 			str = API.Fichi.read("jogo_salvo.ap").split("\n");
 		}catch(IOException e){
-			JOptionPane.showMessageDialog(this, "Não existe um jogo salvo.");
+			JOptionPane.showMessageDialog(this, "NÃ£o existe um jogo salvo.");
 			dispose();
 		}
 		String[] size = str[1].split(",");
@@ -1225,10 +1242,17 @@ public class ContinueGameBot extends JFrame {
 				}
 			}
 			
-			JOptionPane.showMessageDialog(this, jogadore + " Wins !!!");
+			if(jogadore == jogadoresnames[0]) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/win_game.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+			}else {
+				try {  API.Sounds.PlaySound("/multimedia/audios/lose_game.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+			}
+			
+			PopupOneOption dialog = new PopupOneOption(this, jogadore + " Venceu !!!", soundfile);
+    		dialog.run(widthfile, heightfile);
 			
 			
-			Popup fram = new Popup(this, "Quer voltar a jogar a partir do último jogo salvo?", soundfile);
+			PopupTwoOptions fram = new PopupTwoOptions(this, "Quer voltar a jogar a partir do ï¿½ltimo jogo salvo?", soundfile);
 			
         	try {
 				game.restart();
@@ -1278,9 +1302,12 @@ public class ContinueGameBot extends JFrame {
         }
 		
         if (game.myBord.isFull()) {
-        	JOptionPane.showMessageDialog(this, "Tie Game !!!");
+        	try {  API.Sounds.PlaySound("/multimedia/audios/game_lose.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
         	
-        	Popup fram = new Popup(this, "Quer voltar a jogar a partir do último jogo salvo?", soundfile);
+        	PopupOneOption dialog = new PopupOneOption(this, "Empate !!!", soundfile);
+    		dialog.run(widthfile, heightfile);
+        	
+        	PopupTwoOptions fram = new PopupTwoOptions(this, "Quer voltar a jogar a partir do Ãºltimo jogo salvo?", soundfile);
 			
         	try {
 				game.restart();
@@ -1334,7 +1361,7 @@ public class ContinueGameBot extends JFrame {
 	private void exit() {
 		listening = false;
 		listeningmous = false;
-		Popup fram = new Popup(this, "Tem a certeza que pretende sair ?", soundfile);
+		PopupTwoOptions fram = new PopupTwoOptions(this, "Tem a certeza que pretende sair ?", soundfile);
 		
 		if(fram.run(widthfile, heightfile)) {
 			System.exit(0);
@@ -1342,6 +1369,40 @@ public class ContinueGameBot extends JFrame {
 		listening = true;
 		listeningmous = true;
     }
+	
+	private void back() {
+		PopupTwoOptions fram = new PopupTwoOptions(this, "Deseja sair do jogo atual ?", soundfile);
+    	
+		if(fram.run(widthfile, heightfile)) {
+			try {
+				game.restart();
+			} catch (FILException e1) {e1.printStackTrace();}
+			
+			botfacil2 = false;
+        	botnormal2 = false;
+        	botmedio2 = false;
+        	botdificil2 = false;
+        	botfacil3 = false;
+        	botnormal3 = false;
+        	botmedio3 = false;
+        	botdificil3 = false;
+        	botfacil4 = false;
+        	botnormal4 = false;
+        	botmedio4 = false;
+        	botdificil4 = false;
+			
+			setLoca(getLocation());
+			listening = false;
+			listeningmous = false;
+			clipTimePostion = clip.getMicrosecondPosition();
+			clip.stop();
+			setPlayOption(false);
+			PlayOption frm = new PlayOption();
+			frm.setVisible(true);
+			
+			dispose();
+		}
+	}
 	
 	public void setLoca(Point loc) {
 		this.loc = loc;

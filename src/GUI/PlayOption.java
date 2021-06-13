@@ -129,16 +129,19 @@ public class PlayOption extends JFrame implements ComponentListener {
 		    				selected = 3;
 		        			
 		        		}else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
-		        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		        			
                     		switch (selected) {
 	                  		  case 1:
-	                  			System.out.println("Monday1");
+	                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+	                  			newgameopgui();
 	                  		    break;
 	                  		  case 2:
-	                  			System.out.println("Tuesday1");
+	                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+	                  			continuegamegui();
 	                  		    break;
 	                  		  case 3:
-	                  			System.out.println("Wednesday1");
+	                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+	                  			back();
 	                  		    break;
 	                  		}
                         }
@@ -333,19 +336,7 @@ public class PlayOption extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				
-				setLoca(getLocation());
-				opcao = false;
-				selected = 0;
-				listening = false;
-				NewGameOptions.setPlayop(true);
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				frame1 = new NewGameOptions();
-				frame1.setVisible(true);
-				
-				dispose();
+				newgameopgui();
 			}
 		});
 		btnnewgame.setBounds(164, 310, 296, 112);
@@ -369,122 +360,7 @@ public class PlayOption extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				
-				File file = new File("jogo_salvo.ap");
-				if(file.exists()) {
-					
-					String[] fline = new String[] {};
-					try {
-						fline = API.Fichi.read("jogo_salvo.ap").split("\n");
-					}catch(IOException e1){}
-					
-					
-					if(fline[0].contains("multi")) {
-						
-						setLoca(getLocation());
-						opcao = false;
-						selected = 0;
-						listening = false;
-						ContinueGameMulti.setPlayOption(true);
-						clipTimePostion = clip.getMicrosecondPosition();
-						clip.stop();
-						ContinueGameMulti fram;
-						try {
-							fram = new ContinueGameMulti();
-							fram.setVisible(true);
-						} catch (FILException e1) {e1.printStackTrace();}
-						dispose();
-						
-					}else {
-						try {
-							if(fline[0].split(",")[0].contains("botfacil4")) {
-					    		ContinueGameBot.setBotfacil4(true);
-							}else if(fline[0].split(",")[0].contains("botnormal4")) {
-								ContinueGameBot.setBotnormal4(true);
-							}else if(fline[0].split(",")[0].contains("botmedio4")) {
-								ContinueGameBot.setBotmedio4(true);
-							}else if(fline[0].split(",")[0].contains("botdificil4")) {
-								ContinueGameBot.setBotdificil4(true);
-							}else {
-								if(fline[0].split(",")[0].contains("botfacil3")) {
-						    		ContinueGameBot.setBotfacil3(true);
-								}else if(fline[0].split(",")[0].contains("botnormal3")) {
-									ContinueGameBot.setBotnormal3(true);
-								}else if(fline[0].split(",")[0].contains("botmedio3")) {
-									ContinueGameBot.setBotmedio3(true);
-								}else if(fline[0].split(",")[0].contains("botdificil3")) {
-									ContinueGameBot.setBotdificil3(true);
-								}else {
-									if(fline[0].split(",")[0].contains("botfacil2")) {
-							    		ContinueGameBot.setBotfacil2(true);
-									}else if(fline[0].split(",")[0].contains("botnormal2")) {
-										ContinueGameBot.setBotnormal2(true);
-									}else if(fline[0].split(",")[0].contains("botmedio2")) {
-										ContinueGameBot.setBotmedio2(true);
-									}else if(fline[0].split(",")[0].contains("botdificil2")) {
-										ContinueGameBot.setBotdificil2(true);
-									}
-								}
-							}
-						}catch(ArrayIndexOutOfBoundsException e1) {}
-						
-						try {
-							if(fline[0].split(",")[1].contains("botfacil3")) {
-					    		ContinueGameBot.setBotfacil3(true);
-							}else if(fline[0].split(",")[1].contains("botnormal3")) {
-								ContinueGameBot.setBotnormal3(true);
-							}else if(fline[0].split(",")[1].contains("botmedio3")) {
-								ContinueGameBot.setBotmedio3(true);
-							}else if(fline[0].split(",")[1].contains("botdificil3")) {
-								ContinueGameBot.setBotdificil3(true);
-							}else {
-								if(fline[0].split(",")[1].contains("botfacil2")) {
-						    		ContinueGameBot.setBotfacil2(true);
-								}else if(fline[0].split(",")[1].contains("botnormal2")) {
-									ContinueGameBot.setBotnormal2(true);
-								}else if(fline[0].split(",")[1].contains("botmedio2")) {
-									ContinueGameBot.setBotmedio2(true);
-								}else if(fline[0].split(",")[1].contains("botdificil2")) {
-									ContinueGameBot.setBotdificil2(true);
-								}
-							}
-						}catch(ArrayIndexOutOfBoundsException e1) {}
-						
-						try {
-							if(fline[0].split(",")[2].contains("botfacil2")) {
-					    		ContinueGameBot.setBotfacil2(true);
-							}else if(fline[0].split(",")[2].contains("botnormal2")) {
-								ContinueGameBot.setBotnormal2(true);
-							}else if(fline[0].split(",")[2].contains("botmedio2")) {
-								ContinueGameBot.setBotmedio2(true);
-							}else if(fline[0].split(",")[2].contains("botdificil2")) {
-								ContinueGameBot.setBotdificil2(true);
-							}
-						}catch(ArrayIndexOutOfBoundsException e1) {}
-						
-						setLoca(getLocation());
-						opcao = false;
-						selected = 0;
-						listening = false;
-						ContinueGameBot.setPlayOption(true);
-						clipTimePostion = clip.getMicrosecondPosition();
-						clip.stop();
-						ContinueGameBot fram;
-						try {
-							fram = new ContinueGameBot();
-							fram.setVisible(true);
-						} catch (FILException e1) {e1.printStackTrace();}
-						dispose();
-						
-					}
-					
-				}else {
-					listening = false;
-					JOptionPane.showMessageDialog(mainframe, "Não existe um jogo salvo.");
-					listening = true;
-				}
-				
+				continuegamegui();
 			}
 		});
 		btncontinue.setBounds(556, 307, 296, 112);
@@ -508,19 +384,7 @@ public class PlayOption extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
-				
-				setLoca(getLocation());
-				opcao = false;
-				selected = 0;
-				listening = false;
-				Menu.setPlayop(true);
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				frame = new Menu();
-				frame.setVisible(true);
-				
-				dispose();
+				back();
 			}
 		});
 		btnback.setBounds(354, 566, 296, 112);
@@ -563,9 +427,159 @@ public class PlayOption extends JFrame implements ComponentListener {
 		continuegamemult = continuegamemult1;
 	}
 	
+	private void newgameopgui() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		
+		setLoca(getLocation());
+		opcao = false;
+		selected = 0;
+		listening = false;
+		NewGameOptions.setPlayop(true);
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		frame1 = new NewGameOptions();
+		frame1.setVisible(true);
+		
+		dispose();
+	}
+	
+	private void continuegamegui() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		
+		File file = new File("jogo_salvo.ap");
+		if(file.exists()) {
+			
+			String[] fline = new String[] {};
+			try {
+				fline = API.Fichi.read("jogo_salvo.ap").split("\n");
+			}catch(IOException e1){}
+			
+			
+			if(fline[0].contains("multi")) {
+				
+				setLoca(getLocation());
+				opcao = false;
+				selected = 0;
+				listening = false;
+				ContinueGameMulti.setPlayOption(true);
+				clipTimePostion = clip.getMicrosecondPosition();
+				clip.stop();
+				ContinueGameMulti fram;
+				try {
+					fram = new ContinueGameMulti();
+					fram.setVisible(true);
+				} catch (FILException e1) {e1.printStackTrace();}
+				dispose();
+				
+			}else {
+				try {
+					if(fline[0].split(",")[0].contains("botfacil4")) {
+			    		ContinueGameBot.setBotfacil4(true);
+					}else if(fline[0].split(",")[0].contains("botnormal4")) {
+						ContinueGameBot.setBotnormal4(true);
+					}else if(fline[0].split(",")[0].contains("botmedio4")) {
+						ContinueGameBot.setBotmedio4(true);
+					}else if(fline[0].split(",")[0].contains("botdificil4")) {
+						ContinueGameBot.setBotdificil4(true);
+					}else {
+						if(fline[0].split(",")[0].contains("botfacil3")) {
+				    		ContinueGameBot.setBotfacil3(true);
+						}else if(fline[0].split(",")[0].contains("botnormal3")) {
+							ContinueGameBot.setBotnormal3(true);
+						}else if(fline[0].split(",")[0].contains("botmedio3")) {
+							ContinueGameBot.setBotmedio3(true);
+						}else if(fline[0].split(",")[0].contains("botdificil3")) {
+							ContinueGameBot.setBotdificil3(true);
+						}else {
+							if(fline[0].split(",")[0].contains("botfacil2")) {
+					    		ContinueGameBot.setBotfacil2(true);
+							}else if(fline[0].split(",")[0].contains("botnormal2")) {
+								ContinueGameBot.setBotnormal2(true);
+							}else if(fline[0].split(",")[0].contains("botmedio2")) {
+								ContinueGameBot.setBotmedio2(true);
+							}else if(fline[0].split(",")[0].contains("botdificil2")) {
+								ContinueGameBot.setBotdificil2(true);
+							}
+						}
+					}
+				}catch(ArrayIndexOutOfBoundsException e1) {}
+				
+				try {
+					if(fline[0].split(",")[1].contains("botfacil3")) {
+			    		ContinueGameBot.setBotfacil3(true);
+					}else if(fline[0].split(",")[1].contains("botnormal3")) {
+						ContinueGameBot.setBotnormal3(true);
+					}else if(fline[0].split(",")[1].contains("botmedio3")) {
+						ContinueGameBot.setBotmedio3(true);
+					}else if(fline[0].split(",")[1].contains("botdificil3")) {
+						ContinueGameBot.setBotdificil3(true);
+					}else {
+						if(fline[0].split(",")[1].contains("botfacil2")) {
+				    		ContinueGameBot.setBotfacil2(true);
+						}else if(fline[0].split(",")[1].contains("botnormal2")) {
+							ContinueGameBot.setBotnormal2(true);
+						}else if(fline[0].split(",")[1].contains("botmedio2")) {
+							ContinueGameBot.setBotmedio2(true);
+						}else if(fline[0].split(",")[1].contains("botdificil2")) {
+							ContinueGameBot.setBotdificil2(true);
+						}
+					}
+				}catch(ArrayIndexOutOfBoundsException e1) {}
+				
+				try {
+					if(fline[0].split(",")[2].contains("botfacil2")) {
+			    		ContinueGameBot.setBotfacil2(true);
+					}else if(fline[0].split(",")[2].contains("botnormal2")) {
+						ContinueGameBot.setBotnormal2(true);
+					}else if(fline[0].split(",")[2].contains("botmedio2")) {
+						ContinueGameBot.setBotmedio2(true);
+					}else if(fline[0].split(",")[2].contains("botdificil2")) {
+						ContinueGameBot.setBotdificil2(true);
+					}
+				}catch(ArrayIndexOutOfBoundsException e1) {}
+				
+				setLoca(getLocation());
+				opcao = false;
+				selected = 0;
+				listening = false;
+				ContinueGameBot.setPlayOption(true);
+				clipTimePostion = clip.getMicrosecondPosition();
+				clip.stop();
+				ContinueGameBot fram;
+				try {
+					fram = new ContinueGameBot();
+					fram.setVisible(true);
+				} catch (FILException e1) {e1.printStackTrace();}
+				dispose();
+				
+			}
+			
+		}else {
+			listening = false;
+			JOptionPane.showMessageDialog(mainframe, "NÃ£o existe um jogo salvo.");
+			listening = true;
+		}
+	}
+	
+	private void back() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		
+		setLoca(getLocation());
+		opcao = false;
+		selected = 0;
+		listening = false;
+		Menu.setPlayop(true);
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		frame = new Menu();
+		frame.setVisible(true);
+		
+		dispose();
+	}
+	
 	private void exit() {
 		listening = false;
-		Popup fram = new Popup(this, "Tem a certeza que pretende sair ?", soundfile);
+		PopupTwoOptions fram = new PopupTwoOptions(this, "Tem a certeza que pretende sair ?", soundfile);
 		
 		if(fram.run(widthfile, heightfile)) {
 			System.exit(0);

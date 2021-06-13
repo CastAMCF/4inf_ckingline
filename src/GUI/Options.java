@@ -69,8 +69,8 @@ public class Options extends JFrame implements ComponentListener {
 	private JLabel text_2;
 	private JLabel imagem;
 	private static Menu frame;
-	private boolean listright=false;
 	private boolean listleft=false;
+	private boolean listright=false;
 	private boolean listpecadown=false;
 	private boolean stop = false;
 	private int width;
@@ -79,6 +79,7 @@ public class Options extends JFrame implements ComponentListener {
 	private int heightslider;
 	private double dividerslider;
 	private String[] resol = {"1024 X 800", "1152 X 960", "1280 X 1024"};
+	private int index;
 	private int widthfile = 0;
 	private int heightfile = 0;
 	private int soundfile = 0;
@@ -107,29 +108,77 @@ public class Options extends JFrame implements ComponentListener {
             			switch (ke.getID()) {
 	                    case KeyEvent.KEY_PRESSED:
 	                        
-	                        if(listright) {
-	                        	text_1.setText(""+ke.getKeyChar());
+	                        if(listleft) {
+	                        	if(ke.getKeyCode() == 37) {
+	                        		text_1.setText("<");
+	                        	}else if(ke.getKeyCode() == 38) {
+	                        		text_1.setText("^");
+	                        	}else if(ke.getKeyCode() == 39) {
+	                        		text_1.setText(">");
+	                        	}else if(ke.getKeyCode() == 40) {
+	                        		text_1.setText("\\/");
+	                        	}else if(ke.getKeyCode() == 10) {
+	                        		text_1.setText("Enter");
+	                        	}else if(ke.getKeyCode() == 8) {
+	                        		text_1.setText("BackSpace");
+	                        	}else {
+	                        		text_1.setText(""+ke.getKeyChar());
+	                        	}
+	                        	
 	                        	vk1 = ke.getKeyCode();
-	                        	listright=false;
+	                        	listleft=false;
+	                        	try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 	                        	break;
 	                        }
 	                        
-	                        if(listleft) {
-	                        	text_1_1.setText(""+ke.getKeyChar());
+	                        if(listright) {
+	                        	if(ke.getKeyCode() == 37) {
+	                        		text_1_1.setText("<");
+	                        	}else if(ke.getKeyCode() == 38) {
+	                        		text_1_1.setText("^");
+	                        	}else if(ke.getKeyCode() == 39) {
+	                        		text_1_1.setText(">");
+	                        	}else if(ke.getKeyCode() == 40) {
+	                        		text_1_1.setText("\\/");
+	                        	}else if(ke.getKeyCode() == 10) {
+	                        		text_1_1.setText("Enter");
+	                        	}else if(ke.getKeyCode() == 8) {
+	                        		text_1_1.setText("BackSpace");
+	                        	}else {
+	                        		text_1_1.setText(""+ke.getKeyChar());
+	                        	}
+	                        	
 	                        	vk2 = ke.getKeyCode();
-	                        	listleft=false;
+	                        	listright=false;
+	                        	try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 	                        	break;
 	                        }
 	                        
 	                        if(listpecadown) {
-	                        	text_1_2.setText(""+ke.getKeyChar());
+	                        	if(ke.getKeyCode() == 37) {
+	                        		text_1_2.setText("<");
+	                        	}else if(ke.getKeyCode() == 38) {
+	                        		text_1_2.setText("^");
+	                        	}else if(ke.getKeyCode() == 39) {
+	                        		text_1_2.setText(">");
+	                        	}else if(ke.getKeyCode() == 10) {
+	                        		text_1_2.setText("Enter");
+	                        	}else if(ke.getKeyCode() == 8) {
+	                        		text_1_2.setText("BackSpace");
+	                        	}else if(ke.getKeyCode() == 40) {
+	                        		text_1_2.setText("\\/");
+	                        	}else {
+	                        		text_1_2.setText(""+ke.getKeyChar());
+	                        	}
+	                        	
 	                        	vk3 = ke.getKeyCode();
 	                        	listpecadown=false;
+	                        	try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 	                        	break;
 	                        }
 	                        
 	                        if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
-			        			
+	                        	try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 			        			if(opcao) {
 			        				API.Images.setImage(label_3, getClass().getResource("/multimedia/imagens/button_applied_exited.png"));
 			        				API.Images.setImage(label_2, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
@@ -143,7 +192,7 @@ public class Options extends JFrame implements ComponentListener {
 			        			}
 			        			
 			        		}else if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
-			        			
+			        			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 			        			if(opcao) {
 			        				API.Images.setImage(label_3, getClass().getResource("/multimedia/imagens/button_applied_exited.png"));
 			        				API.Images.setImage(label_2, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
@@ -157,12 +206,15 @@ public class Options extends JFrame implements ComponentListener {
 			        			}
 			        			
 			        		}else if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+			        			
 	                    		switch (selected) {
 		                  		  case 1:
-		                  			System.out.println("Monday2");
+		                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+		                  			aplicar();
 		                  		    break;
 		                  		  case 2:
-		                  			System.out.println("Tuesday2");
+		                  			try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
+		                  			back();
 		                  		    break;
 		                  		}
 	                        }
@@ -183,6 +235,57 @@ public class Options extends JFrame implements ComponentListener {
 		vk2 = Integer.parseInt(str[4].replaceAll("\\D+",""));
 		vk3 = Integer.parseInt(str[5].replaceAll("\\D+",""));
 		
+		String teclaesq = "";
+		String tecladir = "";
+		String teclabai = "";
+		
+		if(vk1 == 37) {
+			teclaesq = "<";
+    	}else if(vk1 == 38) {
+    		teclaesq = "^";
+    	}else if(vk1 == 39) {
+    		teclaesq = ">";
+    	}else if(vk1 == 10) {
+    		teclaesq = "Enter";
+    	}else if(vk1 == 8) {
+    		teclaesq = "BackSpace";
+    	}else if(vk1 == 40) {
+    		teclaesq = "\\/";
+    	}else {
+    		teclaesq = ""+(char)vk1;
+    	}
+		
+		if(vk2 == 37) {
+			tecladir = "<";
+    	}else if(vk2 == 38) {
+    		tecladir = "^";
+    	}else if(vk2 == 39) {
+    		tecladir = ">";
+    	}else if(vk2 == 10) {
+    		tecladir = "Enter";
+    	}else if(vk2 == 8) {
+    		tecladir = "BackSpace";
+    	}else if(vk2 == 40) {
+    		tecladir = "\\/";
+    	}else {
+    		tecladir = ""+(char)vk2;
+    	}
+		
+		if(vk3 == 37) {
+			teclabai = "<";
+    	}else if(vk3 == 38) {
+    		teclabai = "^";
+    	}else if(vk3 == 39) {
+    		teclabai = ">";
+    	}else if(vk3 == 10) {
+    		teclabai = "Enter";
+    	}else if(vk3 == 8) {
+    		teclabai = "BackSpace";
+    	}else if(vk3 == 40) {
+    		teclabai = "\\/";
+    	}else {
+    		teclabai = ""+(char)vk3;
+    	}
 		
 		try {
 			
@@ -301,6 +404,7 @@ public class Options extends JFrame implements ComponentListener {
 		label_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(label_2, getClass().getResource("/multimedia/imagens/button_back_entered.png"));
 				API.Images.setImage(label_3, getClass().getResource("/multimedia/imagens/button_applied_exited.png"));
 				selected = 1;
@@ -312,19 +416,7 @@ public class Options extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				setLoca(getLocation());
-				opcao = false;
-				selected = 0;
-				listening = false;
-				Menu.setOption(true);
-				clipTimePostion = clip.getMicrosecondPosition();
-				clip.stop();
-				frame = new Menu();
-				frame.setVisible(true);
-				
-				dispose();
-				
+				back();
 			}
 		});
 		label_2.setBounds(48, 626, 296, 112);
@@ -335,6 +427,7 @@ public class Options extends JFrame implements ComponentListener {
 		label_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(label_3, getClass().getResource("/multimedia/imagens/button_applied_entered.png"));
 				API.Images.setImage(label_2, getClass().getResource("/multimedia/imagens/button_back_exited.png"));
 				selected = 2;
@@ -346,19 +439,7 @@ public class Options extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				String str = text.getText();
-			    String[] arrOfStr = str.split(" X ");
-			    
-			    width = Integer.parseInt(arrOfStr[0]);
-			    height = Integer.parseInt(arrOfStr[1]);
-				
-			    Fichi.writePrefs("preferencias.ap", width, height, soundfile, vk1, vk2, vk3);
-			    
-			    setPreferredSize(new Dimension(width, height));
-			    pack();
-			    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-			    setBounds((int)(size.getWidth()/2)-(width/2), (int)(size.getHeight()/2)-(height/2), width, height);
+				aplicar();
 			}
 		});
 		label_3.setBounds(520, 626, 296, 112);
@@ -400,6 +481,7 @@ public class Options extends JFrame implements ComponentListener {
 		label_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(label_4, getClass().getResource("/multimedia/imagens/left_arrow_entered.png"));
 			}
 			@Override
@@ -408,12 +490,12 @@ public class Options extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int index = findIndex(resol, text.getText());
-				try {
-					text.setText(resol[index-1]);
-				}catch(ArrayIndexOutOfBoundsException e1){
-					text.setText(resol[resol.length-1]);
-				}
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+				index--;
+            	if(index < 0)
+            		index = 2;
+            	
+            	text.setText(resol[index]);
 			}
 		});
 		label_4.setBounds(536, 171, 62, 62);
@@ -424,6 +506,7 @@ public class Options extends JFrame implements ComponentListener {
 		label_5.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(label_5, getClass().getResource("/multimedia/imagens/right_arrow_entered.png"));
 			}
 			@Override
@@ -432,12 +515,12 @@ public class Options extends JFrame implements ComponentListener {
 			}
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int index = findIndex(resol, text.getText());
-				try {
-					text.setText(resol[index+1]);
-				}catch(ArrayIndexOutOfBoundsException e1){
-					text.setText(resol[index-index]);
-				}
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+				index++;
+            	if(index > 2)
+            		index = 0;
+            	
+            	text.setText(resol[index]);
 			}
 		});
 		label_5.setBounds(918, 171, 62, 62);
@@ -454,10 +537,12 @@ public class Options extends JFrame implements ComponentListener {
 		imagem.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				API.Images.setImage(imagem, getClass().getResource("/multimedia/imagens/slider_point_entered.png"));
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 				API.Images.setImage(imagem, getClass().getResource("/multimedia/imagens/slider_point_exited.png"));
 			}
 		});
@@ -504,12 +589,13 @@ public class Options extends JFrame implements ComponentListener {
 		API.Images.setImage(label_6, getClass().getResource("/multimedia/imagens/slider.png"));
 		contentPane.add(label_6);
 		
-		text_1 = new JLabel(""+(char)vk1, SwingConstants.CENTER);
+		text_1 = new JLabel(teclaesq, SwingConstants.CENTER);
 		text_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				text_1.setText("Escutando");
-				listright = true;
+				listleft = true;
 			}
 		});
 		text_1.setForeground(Color.decode("#FF8B3E"));
@@ -517,12 +603,13 @@ public class Options extends JFrame implements ComponentListener {
 		text_1.setBounds(613, 348, 296, 72);
 		contentPane.add(text_1);
 		
-		text_1_1 = new JLabel(""+(char)vk2, SwingConstants.CENTER);
+		text_1_1 = new JLabel(tecladir, SwingConstants.CENTER);
 		text_1_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				text_1_1.setText("Escutando");
-				listleft = true;
+				listright = true;
 			}
 		});
 		text_1_1.setForeground(new Color(255, 139, 62));
@@ -530,10 +617,11 @@ public class Options extends JFrame implements ComponentListener {
 		text_1_1.setBounds(613, 438, 296, 72);
 		contentPane.add(text_1_1);
 		
-		text_1_2 = new JLabel(""+(char)vk3, SwingConstants.CENTER);
+		text_1_2 = new JLabel(teclabai, SwingConstants.CENTER);
 		text_1_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				try {  API.Sounds.PlaySound("/multimedia/audios/mouse_on.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {e.printStackTrace();}
 				text_1_2.setText("Escutando");
 				listpecadown = true;
 			}
@@ -562,23 +650,6 @@ public class Options extends JFrame implements ComponentListener {
 		
 	}
 	
-	private int findIndex(String arr[], String t)
-    {
-		int len = arr.length;
-        int i = 0;
-
-        while (i < len) {
-
-            if (arr[i].equals(t)) {
-                return i;
-            }
-            else {
-                i = i + 1;
-            }
-        }
-        return -1;
-    }
-	
 	public void setLoca(Point loc) {
 		this.loc = loc;
 	}
@@ -599,9 +670,40 @@ public class Options extends JFrame implements ComponentListener {
 		return clipTimePostion;
 	}
 	
+	private void back() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		setLoca(getLocation());
+		opcao = false;
+		selected = 0;
+		listening = false;
+		Menu.setOption(true);
+		clipTimePostion = clip.getMicrosecondPosition();
+		clip.stop();
+		frame = new Menu();
+		frame.setVisible(true);
+		
+		dispose();
+	}
+	
+	private void aplicar() {
+		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
+		String str = text.getText();
+	    String[] arrOfStr = str.split(" X ");
+	    
+	    width = Integer.parseInt(arrOfStr[0]);
+	    height = Integer.parseInt(arrOfStr[1]);
+		
+	    Fichi.writePrefs("preferencias.ap", width, height, soundfile, vk1, vk2, vk3);
+	    
+	    setPreferredSize(new Dimension(width, height));
+	    pack();
+	    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+	    setBounds((int)(size.getWidth()/2)-(width/2), (int)(size.getHeight()/2)-(height/2), width, height);
+	}
+	
 	private void exit() {
 		listening = false;
-		Popup fram = new Popup(this, "Tem a certeza que pretende sair ?", soundfile);
+		PopupTwoOptions fram = new PopupTwoOptions(this, "Tem a certeza que pretende sair ?", soundfile);
 		
 		String str = text.getText();
 	    String[] arrOfStr = str.split(" X ");

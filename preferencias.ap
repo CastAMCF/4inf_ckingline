@@ -1,6 +1,6 @@
 width=1024
 height=800
 sound=73
-leftarrow=65
-rightarrow=68
-droparrow=83
+leftarrow=37
+rightarrow=39
+droparrow=40
