@@ -1,20 +1,36 @@
 
 package API;
 
+/**
+ * Tabuleiro do Jogo
+ * @author Asus
+ */
 public final class Board {
 
     Piece[][] board;
-
+    
+    /**
+     * Criação do tabuleiro por predefinição caso nenhum parâmetro seja defenido
+     * @throws FILException 
+     */
     public Board() throws FILException {
         this(6,7);
 
     }
     
+    /**
+     * Criação do tabuleiro pelos parâmetros defenidos
+     * @throws FILException 
+     */
     public Board(int size1, int size2) throws FILException {
     	board = new Piece[size1][size2];
         restart();
     }
-
+    
+    /**
+     * Reinicia o tabuleiro
+     * @throws FILException 
+     */
     public void restart() throws FILException {
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
@@ -22,7 +38,10 @@ public final class Board {
             }
         }
     }
-
+    
+    /**
+     * Converte o tabuleiro para texto
+     */
     public final String toString() {
         StringBuilder txt = new StringBuilder();
         for (int y = 0; y < board.length; y++) {
@@ -34,6 +53,12 @@ public final class Board {
         return txt.toString();
     }
     
+    /**
+     * Joga a peça desiganda na coluna designada 
+     * @param p
+     * @param x
+     * @throws FILException 
+     */
     public final void play(Piece p, int x) throws FILException {
     	int y = board.length - 1;
     	
@@ -61,7 +86,10 @@ public final class Board {
         }
         
     }
-
+    
+    /**
+     * Verifica se o tabuleiro tá cheio
+     */
     public final boolean isFull() {
         for (int y = 0; y < board.length; y++) {
             for (int x = 0; x < board[y].length; x++) {
@@ -70,7 +98,12 @@ public final class Board {
         }
         return true;
     }
-
+    
+    /**
+     * Verifica se o jogador designado é o vencedor pelo o número de peças seguidas designado
+     * @param p
+     * @param check
+     */
     public final boolean isWinner(Piece p, int check) {
         int count = 0;
 
@@ -137,6 +170,11 @@ public final class Board {
         return count == check;
     }
     
+    /**
+     * Verifica se o jogador designado é o vencedor pelo o número de peças designado onde as peças podem ser seguidas ou não
+     * @param p
+     * @param check
+     */
     public final boolean mysteryWinnercheck(Piece p, int check) {
         int count = 0;
 
@@ -201,6 +239,13 @@ public final class Board {
         return count == check;
     }
     
+    /**
+     * Inteligência artificial de nível 1 que verifica se existem peças do adversário seguidas um valor a menos que número de peças designado se sim bçoqueia se for igual à variável temp n bloqueia e se não encontrar utiliza Inteligência artificial de nível 0
+     * @param p
+     * @param p1
+     * @param check
+     * @param temp
+     */
     public int chekagembotnormal(Piece p, Piece p1, int check, int temp) {
     	int count = 0;
     	
@@ -321,6 +366,13 @@ public final class Board {
     	
     }
     
+    /**
+     * Inteligência artificial de nível 2 que verifica se existem peças do adversário seguidas um valor a menos que número de peças designado se sim bçoqueia e verifica se existem peças do jogador seguidas um valor a menos que número de peças designado se sim tenta ganhar se algum dos valores antes referidos for igual à variável temp n joga a peça se não encontrar utiliza Inteligência artificial de nível 0
+     * @param p
+     * @param p1
+     * @param check
+     * @param temp
+     */
     public int chekagembotmedio(Piece p, Piece p1, int check, int temp) {
     	int count = 0;
     	
@@ -557,6 +609,13 @@ public final class Board {
     	
     }
     
+    /**
+     * Inteligência artificial de nível 3 que verifica se existem peças do adversário seguidas um valor a menos que número de peças designado se sim bçoqueia e verifica se existem peças do jogador seguidas um valor a menos que número de peças designado se sim tenta ganhar e verifica se existem peças do adversário sem serem seguidas um valor a menos que número de peças designado se sim bçoqueia se algum dos valores antes referidos for igual à variável temp n joga a peça se não encontrar utiliza Inteligência artificial de nível 0
+     * @param p
+     * @param p1
+     * @param check
+     * @param temp
+     */
     public int chekagembothard(Piece p, Piece p1, int check, int temp) {
     	int count = 0;
     	int blank = 0;

@@ -36,6 +36,10 @@ import javax.swing.border.EmptyBorder;
 import API.FILException;
 import API.Fichi;
 
+/**
+ * Inicia as opções do modo singleplayer
+ * @author Asus
+ */
 public class SinglePlayerOptions extends JFrame implements ComponentListener {
 	
 	private Clip clip;

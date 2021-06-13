@@ -6,8 +6,20 @@ import java.io.InputStream;
 
 import javax.sound.sampled.*;
 
+/**
+ * Tratamento dos sons
+ * @author Asus
+ */
 public class Sounds {
 	
+        /**
+         * Inicia um ficheiro de música pelo caminho especificado e com o volume designado
+         * @param path
+         * @param volume
+         * @throws UnsupportedAudioFileException
+         * @throws IOException
+         * @throws LineUnavailableException 
+         */
 	public static void PlaySound(String path, int volume) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		Clip clip;
 		InputStream in = Sounds.class.getResourceAsStream(path);

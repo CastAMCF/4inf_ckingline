@@ -31,6 +31,10 @@ import javax.swing.border.EmptyBorder;
 
 import API.Fichi;
 
+/**
+ * Inicia a opçao de jogo
+ * @author Asus
+ */
 public class NewGameOptions extends JFrame implements ComponentListener {
 	
 	private Clip clip;

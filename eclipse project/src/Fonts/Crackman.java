@@ -33,7 +33,7 @@ public class Crackman {
 		
 		//cria a fonte
 		try {
-			font_back = Font.createFont(Font.TRUETYPE_FONT, Crackman.class.getResourceAsStream("/Fonts/crackman.ttf")).deriveFont(size);
+			font_back = Font.createFont(Font.TRUETYPE_FONT, Crackman.class.getResourceAsStream("/Fonts/crackman_back.ttf")).deriveFont(size);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			//alistar a fonte
 			ge.registerFont(font_back);
@@ -51,7 +51,7 @@ public class Crackman {
 		
 		//cria a fonte
 		try {
-			font_front = Font.createFont(Font.TRUETYPE_FONT, Crackman.class.getResourceAsStream("/Fonts/crackman.ttf")).deriveFont(size);
+			font_front = Font.createFont(Font.TRUETYPE_FONT, Crackman.class.getResourceAsStream("/Fonts/crackman_front.ttf")).deriveFont(size);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			//alistar a fonte
 			ge.registerFont(font_front);

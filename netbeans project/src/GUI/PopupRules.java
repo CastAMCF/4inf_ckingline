@@ -28,6 +28,10 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
 
+/**
+ * Inicia o JDialog das regras
+ * @author Asus
+ */
 public class PopupRules extends JDialog implements MouseListener {
 	
 	private JLabel btnOk;

@@ -33,6 +33,10 @@ import javax.swing.border.EmptyBorder;
 
 import API.Fichi;
 
+/**
+ * Cria o JFrame "Menu" e inicializa o mesmo(é o único JFrame q tem o método main)
+ * @author Asus
+ */
 public class Menu extends JFrame implements ComponentListener {
 	
 	private Menu frame;
@@ -57,9 +61,13 @@ public class Menu extends JFrame implements ComponentListener {
 	private boolean optionsgui = false;
 	private boolean playoptiongui = false;
 	private static long clipTimePostion;
+        /**Variável usada para diminuir o tempo da música*/
 	public int count = 0;
+        /**Variável usada para diminuir o tempo da música*/
 	public int count1 = 1;
+        /**Variável usada para diminuir o tempo da música*/
 	public int count2 = 0;
+        /**Variável usada para diminuir o tempo da música*/
 	public int count3 = 1;
 	private static boolean option = false;
 	private static boolean playop = false;
@@ -645,6 +653,11 @@ public class Menu extends JFrame implements ComponentListener {
 		
 	}
 	
+        /**
+         * Deixa de "ouvir" as teclas deste JFrame
+         * Inicializa o JDialog "PopupAbout" e é apresentado com o mesmo
+         * Volta "ouvir" as teclas deste JFrame
+         */
 	private void aboutgui() {
 		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		
@@ -654,6 +667,11 @@ public class Menu extends JFrame implements ComponentListener {
 		listening = true;
 	}
 	
+        /**
+         * Deixa de "ouvir" as teclas deste JFrame
+         * Inicializa o JDialog "PopupRules" e é apresentado com o mesmo
+         * Volta "ouvir" as teclas deste JFrame
+         */
 	private void rulesgui() {
 		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		
@@ -663,6 +681,11 @@ public class Menu extends JFrame implements ComponentListener {
 		listening = true;
 	}
 	
+        /**
+         * Deixa de "ouvir" as teclas deste JFrame
+         * Inicializa o JFrame "PlayOption" e é apresentado com o mesmo
+         * Fecha este JFrame
+         */
 	private void playoptionsgui() {
 		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		setLoca(getLocation());
@@ -680,6 +703,11 @@ public class Menu extends JFrame implements ComponentListener {
 		dispose();
 	}
 	
+        /**
+         * Deixa de "ouvir" as teclas deste JFrame
+         * Inicializa o JFrame "Options" e é apresentado com o mesmo
+         * Fecha este JFrame
+         */
 	private void optionsgui() {
 		try {  API.Sounds.PlaySound("/multimedia/audios/mouse_click.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 		setLoca(getLocation());
@@ -696,6 +724,13 @@ public class Menu extends JFrame implements ComponentListener {
 		dispose();
 	}
 	
+        /**
+         * Deixa de "ouvir" as teclas deste JFrame
+         * Inicializa o JDialog "PopupTwoOptions" e é apresentado com o mesmo
+         * Se sim fecha este JFrame
+         * Se não fecha apenas o JDialog
+         * Volta "ouvir" as teclas deste JFrame
+         */
 	private void exit() {
 		listening = false;
 		PopupTwoOptions fram = new PopupTwoOptions(this, "Tem a certeza que pretende sair ?", soundfile);
@@ -706,38 +741,62 @@ public class Menu extends JFrame implements ComponentListener {
 		listening = true;
     }
 	
+        /**
+         * Define a localização deste JFrame 
+         */
 	public void setLoca(Point loc) {
 		this.loc = loc;
 	}
 	
+        /**
+         * Recebe a localização deste JFrame 
+         */
 	public static Point getLoca() {
 		return loc;
 	}
 	
+        /**
+         * Recebe o tempo onde a música parou neste JFrame 
+         */
 	public static long getTimeMusic() {
 		return clipTimePostion;
 	}
 	
+        /**
+         * Define se o JFrame "Options" foi aberto
+         */
 	public static void setOption(boolean option1) {
 		option = option1;
 	}
 	
+        /**
+         * Define se o JFrame "PlayOptions" foi aberto
+         */
 	public static void setPlayop(boolean playop1) {
 		playop = playop1;
 	}
-
+        
+        /**
+         * Esta classe é defenida mas não é usada
+         */
 	@Override
 	public void componentHidden(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
-
+        
+        /**
+         * Esta classe é defenida mas não é usada
+         */
 	@Override
 	public void componentMoved(ComponentEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
-
+        
+        /**
+         * Verifica se o tamanho do JFrame foi alterado se sim vai mudar as posições e em alguns casos aumentar o tamanho dos componetes referidos
+         */
 	@Override
 	public void componentResized(ComponentEvent arg0) {
 		int height = this.getHeight();
@@ -756,7 +815,10 @@ public class Menu extends JFrame implements ComponentListener {
 	    label_about.setBounds((int)(744+((width-1024)/1.6)), (int)(661+((height-800)/1.5)), 236+((width-1024)/2), 92+((height-800)/4));
 	    API.Images.setImage(label_about, getClass().getResource("/multimedia/imagens/button_about_exited.png"));
 	}
-
+        
+        /**
+         * Esta classe é defenida mas n é usada
+         */
 	@Override
 	public void componentShown(ComponentEvent arg0) {
 		// TODO Auto-generated method stub

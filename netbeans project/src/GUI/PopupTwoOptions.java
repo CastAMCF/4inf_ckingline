@@ -24,6 +24,10 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
 
+/**
+ * Inicia o JDialog com duas opções
+ * @author Asus
+ */
 public class PopupTwoOptions extends JDialog implements MouseListener {
 	
 	private boolean data = false;

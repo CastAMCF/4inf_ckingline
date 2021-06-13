@@ -27,13 +27,16 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import API.FILException;
 import API.Fichi;
 
+/**
+ * Inicia a opção de continuar ou iniciar novo jogo
+ * @author Asus
+ */
 public class PlayOption extends JFrame implements ComponentListener {
 	
 	private PlayOption mainframe;
@@ -555,7 +558,8 @@ public class PlayOption extends JFrame implements ComponentListener {
 			
 		}else {
 			listening = false;
-			JOptionPane.showMessageDialog(mainframe, "Não existe um jogo salvo.");
+			PopupOneOption dialog = new PopupOneOption(this, "Erro", "Não existe um jogo salvo", soundfile, 35);
+    		dialog.run(widthfile, heightfile);
 			listening = true;
 		}
 	}

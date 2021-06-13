@@ -36,6 +36,10 @@ import javax.swing.border.EmptyBorder;
 
 import API.Fichi;
 
+/**
+ * Inicia as opções
+ * @author Asus
+ */
 public class Options extends JFrame implements ComponentListener {
 	
 	private Clip clip;

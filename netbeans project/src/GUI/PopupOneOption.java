@@ -24,6 +24,10 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
 
+/**
+ * Inicia o JDialog com uma opção
+ * @author Asus
+ */
 public class PopupOneOption extends JDialog implements MouseListener {
 	
 	private JLabel btnOk;
@@ -36,9 +40,9 @@ public class PopupOneOption extends JDialog implements MouseListener {
 	private int volume;
 	
 	
-	public PopupOneOption(Frame parent, String txt, int soundfile) {
+	public PopupOneOption(Frame parent, String title, String txt, int soundfile, int size) {
 		
-		super(parent,"Resultado",true);
+		super(parent,title,true);
 		
 		volume = soundfile;
 		
@@ -123,7 +127,7 @@ public class PopupOneOption extends JDialog implements MouseListener {
 		String html = "<html><body style='width: %1spx'>%1s";
 		text = new JLabel(String.format(html, 500, txt), SwingConstants.CENTER);
 		text.setBounds(102, 96, 570, 156);
-		text.setFont(Fonts.Crackman.Normal(45));
+		text.setFont(Fonts.Crackman.Normal(size));
 		text.setForeground(Color.decode("#FF8B3E"));
 		contentPane.add(text);
         

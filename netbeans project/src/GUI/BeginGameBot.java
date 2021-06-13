@@ -30,6 +30,10 @@ import javax.swing.border.EmptyBorder;
 
 import API.FILException;
 
+/**
+ * Inicia o jogo no modo singleplayer
+ * @author Asus
+ */
 public class BeginGameBot extends JFrame {
 	
 	private static BeginGameBot frame;
@@ -1083,7 +1087,7 @@ public class BeginGameBot extends JFrame {
 				try {  API.Sounds.PlaySound("/multimedia/audios/lose_game.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
 			}
 			
-			PopupOneOption dialog = new PopupOneOption(this, jogadore + " Venceu !!!", soundfile);
+			PopupOneOption dialog = new PopupOneOption(this, "Resultado", jogadore + " Venceu !!!", soundfile, 45);
     		dialog.run(widthfile, heightfile);
 			
 			
@@ -1135,7 +1139,7 @@ public class BeginGameBot extends JFrame {
         if (game.myBord.isFull()) {
         	try {  API.Sounds.PlaySound("/multimedia/audios/lose_game.wav", soundfile);  } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {e1.printStackTrace();}
         	
-        	PopupOneOption dialog = new PopupOneOption(this, "Empate !!!", soundfile);
+        	PopupOneOption dialog = new PopupOneOption(this, "Resultado", "Empate !!!", soundfile, 45);
     		dialog.run(widthfile, heightfile);
         	
         	

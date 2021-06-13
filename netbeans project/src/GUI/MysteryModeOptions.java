@@ -36,6 +36,10 @@ import javax.swing.border.EmptyBorder;
 import API.FILException;
 import API.Fichi;
 
+/**
+ * Inicia as opções do modo mistério
+ * @author Asus
+ */
 public class MysteryModeOptions extends JFrame implements ComponentListener {
 	
 	private Clip clip;

@@ -28,6 +28,10 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
 
+/**
+ * Inicia o JDialog do Acerca
+ * @author Asus
+ */
 public class PopupAbout extends JDialog implements MouseListener {
 	
 	private JLabel btnOk;
@@ -143,7 +147,7 @@ public class PopupAbout extends JDialog implements MouseListener {
 		text1.setForeground(Color.decode("#FF8B3E"));
 		contentPane.add(text1);
 		
-		text2 = new JLabel(String.format("1º Ano"));
+		text2 = new JLabel(String.format("1\u00B0 Ano"));
 		text2.setHorizontalAlignment(SwingConstants.CENTER);
 		text2.setBounds(282, 141, 350, 56);
 		text2.setFont(Fonts.Crackman.Normal(24));
