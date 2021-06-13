@@ -1,7 +1,11 @@
 # 4 in fucking Line BITCH!!!!!!!!!!!
 Quatro em Linha duh
 
-Só falta a merda do resize</br>
+![alt text](https://i.ibb.co/VgHkWNd/game-example1.gif)</br>
+
+Quatro em linha é um jogo bastante simples de jogar. O jogo consiste em 2 jogadores e um tabuleiro, no qual cada jogador tenta colocar quatro peças da mesma cor em linha, tanto na diagonal, como na horizontal ou vertical. O jogador que conseguir colocar as 4 peças em linha da sua cor, é o vencedor, mas se nenhum dos jogadores o conseguir fazer, é considerado empate.</br></br></br>
+
+No projeto do netbeans o caracter  °  aparece na forma de um retângulo mas no projeto do eclipse tá tudo de boas</br>
 *De resto **acho** q tá bom*
 <br/><br/>
 > Solução Mínima (10 valores) ✔️
@@ -29,3 +33,5 @@ Só falta a merda do resize</br>
 - [x] - Variações das regras do jogo
 - [x] - Melhorias na interface e no sistema de gestão de eventos. (*vai se fazendo com o tempo*)
 - [x] - Melhoria na Inteligência Artificial. (*vai se fazendo com o tempo*)
+
+</br>Nota Final: epah vamos ver do q aqui sai
