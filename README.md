@@ -1,6 +1,7 @@
 # 4 in fucking Line BITCH!!!!!!!!!!!
 Quatro em Linha duh
 
+Só falta a merda do resize</br>
 *De resto **acho** q tá bom*
 <br/><br/>
 > Solução Mínima (10 valores) ❌
