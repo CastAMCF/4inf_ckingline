@@ -7,6 +7,7 @@ Quatro em linha é um jogo bastante simples de jogar. O jogo consiste em 2 jogad
 
 A cena do caracter tá corrigida, os ficheiros do eclipse usam o encoding UTF-8 e o netbeans ISO/IEC_8859-1</br>
 No slider do som só podem ir do 4% ao 90% porque aquilo fica a dar exceptions e não dá para controlar a aplicação(descobri isso na defesa lol)</br>
+Os bots são muito burros</br>
 *De resto **acho** q tá bom*
 <br/><br/>
 > Solução Mínima (10 valores) ✔️
