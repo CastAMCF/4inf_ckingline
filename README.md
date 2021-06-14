@@ -38,4 +38,4 @@ No slider do som só podem ir do 4% ao 90% porque aquilo fica a dar exceptions e
 </br>Nota Final: 18
 </br>
 </br>
-</br>I N S T I T U T O    P O L I T É C N I C O   D E   T O M A R  (c)2021
+</br>INSTITUTO POLITÉCNICO DE TOMAR (c)2021
