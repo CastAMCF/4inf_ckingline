@@ -549,34 +549,46 @@ public class Options extends JFrame implements ComponentListener {
 			@Override
 			public void mouseDragged(MouseEvent evt) {
 				
-				imagem.setLocation(imagem.getLocation().x + evt.getX() - imagem.getWidth() / 2, imagem.getLocation().y + evt.getY() - imagem.getHeight() / 2);
+				Thread th = new Thread() {
+	                @Override
+	                public void run(){
+						imagem.setLocation(imagem.getLocation().x + evt.getX() - imagem.getWidth() / 2, imagem.getLocation().y + evt.getY() - imagem.getHeight() / 2);
+						
+						if(imagem.getLocation().y != 270+((heightslider-800)/4)) {
+							imagem.setLocation(imagem.getLocation().x, 270+((heightslider-800)/4));
+						}
+						
+						if(imagem.getLocation().x <= 635+((widthslider-1024)/2)) {
+							imagem.setLocation(635+((widthslider-1024)/2), imagem.getLocation().y);
+						}
+						
+						if(imagem.getLocation().x >= (int)(835+((widthslider-1024)/1.3))) {
+							imagem.setLocation((int)(835+((widthslider-1024)/1.3)), imagem.getLocation().y);
+						}
+						
+						text_2.setText((int)((imagem.getLocation().x-(635+((widthslider-1024)/2)))/dividerslider)+" %");
+						soundfile = (int)((imagem.getLocation().x-(635+((widthslider-1024)/2)))/dividerslider);
+						
+						if(soundfile < 4) {
+							soundfile = 4;
+						}else if(soundfile > 90) {
+							soundfile = 90;
+						}
+						
+						if((int)((imagem.getLocation().x-(635+((widthslider-1024)/2)))/dividerslider) == 0) {
+							clip.stop();
+							stop = true;
+						}else {
+							if(stop) {
+								clip.start();
+								stop = false;
+							}
+							FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+							gainControl.setValue((float)(soundfile-84));
+						}
+	                }
+	            };th.start();
 				
-				if(imagem.getLocation().y != 270+((heightslider-800)/4)) {
-					imagem.setLocation(imagem.getLocation().x, 270+((heightslider-800)/4));
-				}
-				
-				if(imagem.getLocation().x <= 635+((widthslider-1024)/2)) {
-					imagem.setLocation(635+((widthslider-1024)/2), imagem.getLocation().y);
-				}
-				
-				if(imagem.getLocation().x >= (int)(835+((widthslider-1024)/1.3))) {
-					imagem.setLocation((int)(835+((widthslider-1024)/1.3)), imagem.getLocation().y);
-				}
-				
-				text_2.setText((int)((imagem.getLocation().x-(635+((widthslider-1024)/2)))/dividerslider)+" %");
-				soundfile = (int)((imagem.getLocation().x-(635+((widthslider-1024)/2)))/dividerslider);
-				
-				if((int)((imagem.getLocation().x-(635+((widthslider-1024)/2)))/dividerslider) == 0) {
-					clip.stop();
-					stop = true;
-				}else {
-					if(stop) {
-						clip.start();
-						stop = false;
-					}
-					FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-					gainControl.setValue((float)(soundfile-84));
-				}
 			}
 		});
 		imagem.setBounds(635+(int)(soundfile*dividerslider), 270, 60, 50);
