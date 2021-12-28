@@ -1,7 +1,7 @@
 # 4 in fucking Line BITCH!!!!!!!!!!!
 Quatro em Linha duh
 
-![alt text](https://i.ibb.co/VgHkWNd/game-example1.gif)</br>
+![alt text](https://i.imgur.com/lVwPVoU.gif)</br>
 
 Quatro em linha é um jogo bastante simples de jogar. O jogo consiste em 2 jogadores e um tabuleiro, no qual cada jogador tenta colocar quatro peças da mesma cor em linha, tanto na diagonal, como na horizontal ou vertical. O jogador que conseguir colocar as 4 peças em linha da sua cor, é o vencedor, mas se nenhum dos jogadores o conseguir fazer, é considerado empate.</br></br></br>
 
