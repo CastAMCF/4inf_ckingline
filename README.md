@@ -1,4 +1,4 @@
-# 4 in fucking Line BITCH!!!!!!!!!!!
+# Connect4
 Quatro em Linha duh
 
 ![alt text](https://i.imgur.com/lVwPVoU.gif)</br>
